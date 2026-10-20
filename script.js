@@ -1,200 +1,403 @@
 ```javascript
-/* =========================
-   KHỞI ĐỘNG WEBSITE
-========================= */
+/* =========================================
+   LẤY ELEMENT
+========================================= */
 
 const intro = document.getElementById("intro");
 const startBtn = document.getElementById("startBtn");
 
-startBtn.addEventListener("click", () => {
-
-    intro.style.opacity = "0";
-
-    setTimeout(() => {
-        intro.style.display = "none";
-    }, 1000);
-
-    createPetals();
-
-    // thử bật nhạc
-    music.play().catch(() => {});
-});
-
-
-/* =========================
-   NHẠC
-========================= */
-
 const music = document.getElementById("music");
 const musicBtn = document.getElementById("musicBtn");
 
-let playing = false;
-
-musicBtn.addEventListener("click", () => {
-
-    if (!playing) {
-
-        music.play();
-
-        musicBtn.innerHTML =
-            '<i class="fa-solid fa-volume-high"></i> Đang phát';
-
-        playing = true;
-
-    } else {
-
-        music.pause();
-
-        musicBtn.innerHTML =
-            '<i class="fa-solid fa-music"></i> Nhạc nền';
-
-        playing = false;
-    }
-
-});
-
-
-/* =========================
-   CÁNH HOA RƠI
-========================= */
-
-function createPetals() {
-
-    setInterval(() => {
-
-        const petal = document.createElement("div");
-
-        petal.className = "petal";
-
-        const flowers = [
-            "🌸",
-            "🌷",
-            "💗",
-            "🌹",
-            "✨"
-        ];
-
-        petal.innerHTML =
-            flowers[
-                Math.floor(
-                    Math.random() * flowers.length
-                )
-            ];
-
-        petal.style.left =
-            Math.random() * 100 + "vw";
-
-        petal.style.fontSize =
-            Math.random() * 20 + 15 + "px";
-
-        petal.style.animationDuration =
-            Math.random() * 5 + 5 + "s";
-
-        petal.style.opacity =
-            Math.random() * .7 + .3;
-
-        document.body.appendChild(petal);
-
-        setTimeout(() => {
-            petal.remove();
-        }, 10000);
-
-    }, 350);
-}
-
-
-/* =========================
-   LỜI CHÚC
-========================= */
-
-const wishBtn = document.getElementById("wishBtn");
 const popup = document.getElementById("popup");
 const closePopup = document.getElementById("closePopup");
 
-wishBtn.addEventListener("click", () => {
+const wishBtn = document.getElementById("wishBtn");
+const giftBtn = document.getElementById("giftBtn");
 
-    popup.classList.add("show");
+const fireworkBtn =
+    document.getElementById("fireworkBtn");
 
-});
+const memoryBtn =
+    document.getElementById("memoryBtn");
+
+const petalsContainer =
+    document.getElementById("petals");
+
+const canvas =
+    document.getElementById("fireworks");
+
+const ctx =
+    canvas.getContext("2d");
 
 
-closePopup.addEventListener("click", () => {
+/* =========================================
+   BIẾN
+========================================= */
 
-    popup.classList.remove("show");
+let musicPlaying = false;
 
-});
+let musicStarted = false;
+
+let fireworks = [];
 
 
-popup.addEventListener("click", (e) => {
+/* =========================================
+   CANVAS
+========================================= */
 
-    if (e.target === popup) {
+function resizeCanvas() {
 
-        popup.classList.remove("show");
+    canvas.width = window.innerWidth;
+
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* =========================================
+   MỞ WEBSITE
+========================================= */
+
+startBtn.addEventListener(
+    "click",
+    function () {
+
+        intro.classList.add("hide");
+
+        /*
+         * Không cho intro chặn click
+         * sau khi đã biến mất.
+         */
+
+        setTimeout(
+            function () {
+
+                intro.style.display = "none";
+
+            },
+            1000
+        );
+
+        createPetals();
+
+        /*
+         * Trình duyệt thường cho phép
+         * phát nhạc sau khi người dùng click.
+         */
+
+        music
+            .play()
+            .then(
+                function () {
+
+                    musicPlaying = true;
+
+                    musicStarted = true;
+
+                    updateMusicButton();
+
+                }
+            )
+            .catch(
+                function () {
+
+                    console.log(
+                        "Chưa có file music.mp3 hoặc trình duyệt chặn âm thanh."
+                    );
+
+                }
+            );
+
+    }
+);
+
+
+/* =========================================
+   NHẠC
+========================================= */
+
+function updateMusicButton() {
+
+    if (musicPlaying) {
+
+        musicBtn.innerHTML =
+            '<i class="fa-solid fa-volume-high"></i>' +
+            '<span>Đang phát</span>';
+
+    } else {
+
+        musicBtn.innerHTML =
+            '<i class="fa-solid fa-music"></i>' +
+            '<span>Nhạc nền</span>';
 
     }
 
-});
+}
 
 
-/* =========================
-   GIFT
-========================= */
+musicBtn.addEventListener(
+    "click",
+    function () {
 
-const giftBtn = document.getElementById("giftBtn");
+        if (!musicPlaying) {
 
-giftBtn.addEventListener("click", (e) => {
+            music
+                .play()
+                .then(
+                    function () {
 
-    e.preventDefault();
+                        musicPlaying = true;
+
+                        musicStarted = true;
+
+                        updateMusicButton();
+
+                    }
+                )
+                .catch(
+                    function () {
+
+                        alert(
+                            "Bạn cần đặt file music.mp3 vào cùng thư mục với index.html."
+                        );
+
+                    }
+                );
+
+        } else {
+
+            music.pause();
+
+            musicPlaying = false;
+
+            updateMusicButton();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   TẠO CÁNH HOA
+========================================= */
+
+let petalsStarted = false;
+
+function createPetals() {
+
+    if (petalsStarted) {
+        return;
+    }
+
+    petalsStarted = true;
+
+    setInterval(
+        function () {
+
+            createSinglePetal();
+
+        },
+        350
+    );
+
+}
+
+
+function createSinglePetal() {
+
+    const petal =
+        document.createElement("div");
+
+    petal.className = "petal";
+
+    const objects = [
+        "🌸",
+        "🌷",
+        "🌹",
+        "💗",
+        "✨"
+    ];
+
+    petal.innerHTML =
+        objects[
+            Math.floor(
+                Math.random() *
+                objects.length
+            )
+        ];
+
+    petal.style.left =
+        Math.random() * 100 + "vw";
+
+    petal.style.fontSize =
+        Math.random() * 18 + 14 + "px";
+
+    petal.style.opacity =
+        Math.random() * .6 + .3;
+
+    petal.style.animationDuration =
+        Math.random() * 5 + 5 + "s";
+
+    petalsContainer.appendChild(petal);
+
+    setTimeout(
+        function () {
+
+            petal.remove();
+
+        },
+        11000
+    );
+
+}
+
+
+/* =========================================
+   POPUP
+========================================= */
+
+function openPopup() {
 
     popup.classList.add("show");
 
-});
+}
+
+function closePopupFunction() {
+
+    popup.classList.remove("show");
+
+}
 
 
-/* =========================
+wishBtn.addEventListener(
+    "click",
+    openPopup
+);
+
+
+giftBtn.addEventListener(
+    "click",
+    function (event) {
+
+        event.preventDefault();
+
+        openPopup();
+
+    }
+);
+
+
+memoryBtn.addEventListener(
+    "click",
+    openPopup
+);
+
+
+closePopup.addEventListener(
+    "click",
+    closePopupFunction
+);
+
+
+popup.addEventListener(
+    "click",
+    function (event) {
+
+        /*
+         * Chỉ đóng khi click vùng
+         * bên ngoài popup-box.
+         */
+
+        if (
+            event.target === popup
+        ) {
+
+            closePopupFunction();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   ESC ĐỂ ĐÓNG POPUP
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            closePopupFunction();
+
+        }
+
+    }
+);
+
+
+/* =========================================
    PHÁO HOA
-========================= */
+========================================= */
 
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
+function createFirework(
+    x,
+    y
+) {
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    const count = 90;
 
-window.addEventListener("resize", () => {
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-});
-
-
-let particles = [];
-
-
-function createFirework(x, y) {
-
-    for (let i = 0; i < 80; i++) {
+    for (
+        let i = 0;
+        i < count;
+        i++
+    ) {
 
         const angle =
-            Math.random() * Math.PI * 2;
+            Math.random() *
+            Math.PI *
+            2;
 
         const speed =
-            Math.random() * 7 + 2;
+            Math.random() *
+            7 +
+            2;
 
-        particles.push({
+        fireworks.push({
 
             x: x,
 
             y: y,
 
-            vx: Math.cos(angle) * speed,
+            velocityX:
+                Math.cos(angle) *
+                speed,
 
-            vy: Math.sin(angle) * speed,
+            velocityY:
+                Math.sin(angle) *
+                speed,
 
             life: 100,
 
-            size: Math.random() * 3 + 1
+            size:
+                Math.random() *
+                2.5 +
+                1,
+
+            hue:
+                Math.random() *
+                360
 
         });
 
@@ -212,41 +415,59 @@ function animateFireworks() {
         canvas.height
     );
 
-    particles.forEach((p, index) => {
+    for (
+        let i = fireworks.length - 1;
+        i >= 0;
+        i--
+    ) {
 
-        p.x += p.vx;
+        const particle =
+            fireworks[i];
 
-        p.y += p.vy;
+        particle.x +=
+            particle.velocityX;
 
-        p.vy += .05;
+        particle.y +=
+            particle.velocityY;
 
-        p.life--;
+        particle.velocityY += .05;
+
+        particle.life -= 1;
 
         ctx.globalAlpha =
-            p.life / 100;
+            particle.life / 100;
 
         ctx.fillStyle =
-            `hsl(${Math.random() * 360},100%,70%)`;
+            `hsl(
+                ${particle.hue},
+                100%,
+                70%
+            )`;
 
         ctx.beginPath();
 
         ctx.arc(
-            p.x,
-            p.y,
-            p.size,
+            particle.x,
+            particle.y,
+            particle.size,
             0,
             Math.PI * 2
         );
 
         ctx.fill();
 
-        if (p.life <= 0) {
+        if (
+            particle.life <= 0
+        ) {
 
-            particles.splice(index, 1);
+            fireworks.splice(
+                i,
+                1
+            );
 
         }
 
-    });
+    }
 
     ctx.globalAlpha = 1;
 
@@ -259,116 +480,278 @@ function animateFireworks() {
 animateFireworks();
 
 
-/* =========================
-   NÚT NHẬN LỜI CHÚC
-========================= */
+/* =========================================
+   BẮN PHÁO HOA NHIỀU LẦN
+========================================= */
 
-const fireworkBtn =
-    document.getElementById("fireworkBtn");
+function celebration() {
 
-fireworkBtn.addEventListener("click", () => {
+    const total = 12;
 
-    popup.classList.remove("show");
-
-    // pháo hoa nhiều lần
-
-    for (let i = 0; i < 8; i++) {
-
-        setTimeout(() => {
-
-            createFirework(
-                Math.random() * canvas.width,
-                Math.random() * canvas.height * .6
-            );
-
-        }, i * 300);
-
-    }
-
-});
-
-
-/* =========================
-   CLICK MÀN HÌNH TẠO TIM
-========================= */
-
-document.addEventListener("click", (e) => {
-
-    if (
-        e.target.tagName === "BUTTON" ||
-        e.target.tagName === "A"
+    for (
+        let i = 0;
+        i < total;
+        i++
     ) {
-        return;
-    }
 
-    const heart =
-        document.createElement("div");
+        setTimeout(
+            function () {
 
-    heart.innerHTML = "💗";
+                createFirework(
+                    Math.random() *
+                    canvas.width,
 
-    heart.style.position = "fixed";
+                    Math.random() *
+                    canvas.height *
+                    .65
+                );
 
-    heart.style.left = e.clientX + "px";
-
-    heart.style.top = e.clientY + "px";
-
-    heart.style.pointerEvents = "none";
-
-    heart.style.fontSize = "20px";
-
-    heart.style.zIndex = "2000";
-
-    heart.style.transition =
-        "1s ease";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-
-        heart.style.transform =
-            "translateY(-100px) scale(1.5)";
-
-        heart.style.opacity = "0";
-
-    }, 50);
-
-    setTimeout(() => {
-
-        heart.remove();
-
-    }, 1100);
-
-});
-
-
-/* =========================
-   CHỮ HIỆN DẦN
-========================= */
-
-const description =
-    document.querySelector(".description");
-
-const originalText =
-    description.textContent;
-
-description.textContent = "";
-
-let charIndex = 0;
-
-function typeText() {
-
-    if (charIndex < originalText.length) {
-
-        description.textContent +=
-            originalText.charAt(charIndex);
-
-        charIndex++;
-
-        setTimeout(typeText, 70);
+            },
+            i * 250
+        );
 
     }
 
 }
 
-setTimeout(typeText, 1500);
+
+fireworkBtn.addEventListener(
+    "click",
+    function () {
+
+        closePopupFunction();
+
+        celebration();
+
+        /*
+         * Thêm vài trái tim
+         */
+
+        for (
+            let i = 0;
+            i < 15;
+            i++
+        ) {
+
+            setTimeout(
+                function () {
+
+                    createClickHeart(
+                        Math.random() *
+                        window.innerWidth,
+
+                        Math.random() *
+                        window.innerHeight
+                    );
+
+                },
+                i * 100
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   CLICK TẠO TIM
+========================================= */
+
+function createClickHeart(
+    x,
+    y
+) {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "click-heart";
+
+    heart.innerHTML =
+        Math.random() > .5
+            ? "💗"
+            : "💕";
+
+    heart.style.left =
+        x + "px";
+
+    heart.style.top =
+        y + "px";
+
+    document.body.appendChild(
+        heart
+    );
+
+    requestAnimationFrame(
+        function () {
+
+            heart.style.transform =
+                `
+                translate(
+                    ${Math.random() * 60 - 30}px,
+                    -100px
+                )
+                scale(1.5)
+                `;
+
+            heart.style.opacity = "0";
+
+        }
+    );
+
+    setTimeout(
+        function () {
+
+            heart.remove();
+
+        },
+        1100
+    );
+
+}
+
+
+/*
+ * Click ở background sẽ tạo tim.
+ *
+ * Không bắt click của:
+ * - button
+ * - link
+ * - popup
+ */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const target =
+            event.target;
+
+        if (
+            target.closest("button") ||
+            target.closest("a") ||
+            target.closest(".popup-box")
+        ) {
+
+            return;
+
+        }
+
+        createClickHeart(
+            event.clientX,
+            event.clientY
+        );
+
+    }
+);
+
+
+/* =========================================
+   HIỆU ỨNG GÕ CHỮ
+========================================= */
+
+const subtitle =
+    document.querySelector(
+        ".hero-subtitle"
+    );
+
+const subtitleText =
+    subtitle.textContent.trim();
+
+subtitle.textContent = "";
+
+let textIndex = 0;
+
+function typeSubtitle() {
+
+    if (
+        textIndex <
+        subtitleText.length
+    ) {
+
+        subtitle.textContent +=
+            subtitleText[textIndex];
+
+        textIndex++;
+
+        setTimeout(
+            typeSubtitle,
+            65
+        );
+
+    }
+
+}
+
+setTimeout(
+    typeSubtitle,
+    1200
+);
+
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".flower-item, .memory-section .big-heart"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+        function (entries) {
+
+            entries.forEach(
+                function (entry) {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.style.opacity =
+                            "1";
+
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: .2
+        }
+    );
+
+
+revealElements.forEach(
+    function (element) {
+
+        element.style.opacity = "0";
+
+        element.style.transform =
+            "translateY(40px)";
+
+        element.style.transition =
+            "opacity .8s ease, transform .8s ease";
+
+        observer.observe(
+            element
+        );
+
+    }
+);
+
+
+/* =========================================
+   KHỞI TẠO
+========================================= */
+
+updateMusicButton();
 ```
