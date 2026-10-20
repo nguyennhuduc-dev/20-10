@@ -1,13 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="description"
@@ -22,23 +17,20 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================================
-         MÀN HÌNH MỞ ĐẦU
-    ========================================== -->
+    <!-- ==============================
+         INTRO
+    =============================== -->
 
     <div id="intro">
 
         <div class="intro-content">
 
-            <div class="intro-heart">
-                💗
-            </div>
+            <div class="intro-heart">💗</div>
 
             <div class="intro-date">
                 20/10
@@ -53,10 +45,12 @@
                 những người phụ nữ tuyệt vời 💐
             </p>
 
+            <!-- QUAN TRỌNG: onclick trực tiếp -->
             <button
                 id="startBtn"
                 class="main-button"
                 type="button"
+                onclick="openGift()"
             >
                 <i class="fa-solid fa-gift"></i>
                 Mở món quà
@@ -67,16 +61,16 @@
     </div>
 
 
-    <!-- =========================================
-         CÁNH HOA
-    ========================================== -->
+    <!-- ==============================
+         PETALS
+    =============================== -->
 
     <div id="petals"></div>
 
 
-    <!-- =========================================
+    <!-- ==============================
          HEADER
-    ========================================== -->
+    =============================== -->
 
     <header id="header">
 
@@ -101,9 +95,9 @@
     </header>
 
 
-    <!-- =========================================
-         MENU
-    ========================================== -->
+    <!-- ==============================
+         SIDE NAV
+    =============================== -->
 
     <nav class="side-nav">
 
@@ -127,7 +121,10 @@
             <span>Kỷ niệm</span>
         </a>
 
-        <a href="#" id="giftBtn">
+        <a
+            href="#"
+            id="giftBtn"
+        >
             <i class="fa-solid fa-gift"></i>
             <span>Bất ngờ</span>
         </a>
@@ -135,19 +132,19 @@
     </nav>
 
 
-    <!-- =========================================
+    <!-- ==============================
          MAIN
-    ========================================== -->
+    =============================== -->
 
     <main>
 
         <!-- HERO -->
+
         <section
             id="home"
             class="hero"
         >
 
-            <!-- LEFT -->
             <div class="flower-area">
 
                 <div class="pink-glow"></div>
@@ -178,7 +175,6 @@
             </div>
 
 
-            <!-- RIGHT -->
             <div class="hero-content">
 
                 <p class="script-title">
@@ -207,7 +203,7 @@
                 </p>
 
                 <p class="hero-text">
-                    Chúc bạn luôn vui vẻ, xinh đẹp, hạnh phúc
+                    Chúc bạn luôn vui vẻ, hạnh phúc
                     và đạt được mọi ước mơ của mình. 💕
                 </p>
 
@@ -266,9 +262,9 @@
         </section>
 
 
-        <!-- =========================================
+        <!-- ==============================
              FLOWERS
-        ========================================== -->
+        =============================== -->
 
         <section
             id="flowers"
@@ -286,6 +282,7 @@
                 </h2>
 
             </div>
+
 
             <div class="flower-grid">
 
@@ -347,9 +344,9 @@
         </section>
 
 
-        <!-- =========================================
+        <!-- ==============================
              MEMORY
-        ========================================== -->
+        =============================== -->
 
         <section
             id="memory"
@@ -387,9 +384,9 @@
     </main>
 
 
-    <!-- =========================================
+    <!-- ==============================
          POPUP
-    ========================================== -->
+    =============================== -->
 
     <div
         id="popup"
@@ -424,7 +421,6 @@
             </div>
 
             <p class="popup-text">
-
                 Chúc bạn luôn vui vẻ,
                 luôn được yêu thương
                 và luôn tỏa sáng theo cách
@@ -436,7 +432,6 @@
                 đều có thật nhiều niềm vui,
                 nụ cười và những điều
                 thật đẹp. 🌷
-
             </p>
 
             <div class="popup-flowers">
@@ -457,16 +452,16 @@
     </div>
 
 
-    <!-- =========================================
-         FIREWORK CANVAS
-    ========================================== -->
+    <!-- ==============================
+         FIREWORK
+    =============================== -->
 
     <canvas id="fireworks"></canvas>
 
 
-    <!-- =========================================
+    <!-- ==============================
          AUDIO
-    ========================================== -->
+    =============================== -->
 
     <audio
         id="music"
@@ -480,9 +475,9 @@
     </audio>
 
 
-    <!-- =========================================
+    <!-- ==============================
          FOOTER
-    ========================================== -->
+    =============================== -->
 
     <footer>
 
@@ -497,9 +492,46 @@
     </footer>
 
 
+    <!-- ==============================
+         INLINE OPEN GIFT
+         Không phụ thuộc script.js
+    =============================== -->
+
+    <script>
+
+        function openGift() {
+
+            const intro =
+                document.getElementById("intro");
+
+            if (!intro) {
+                console.error(
+                    "Không tìm thấy #intro"
+                );
+
+                return;
+            }
+
+            console.log(
+                "Đã bấm Mở món quà!"
+            );
+
+            intro.classList.add("hide");
+
+            setTimeout(function () {
+
+                intro.style.display = "none";
+
+            }, 1000);
+
+        }
+
+    </script>
+
+
     <!-- JAVASCRIPT -->
+
     <script src="script.js"></script>
 
 </body>
 </html>
-```
