@@ -1,4 +1,8 @@
 ```css
+/* =========================================
+   RESET
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,143 +14,237 @@ html {
 }
 
 body {
-    font-family: "Segoe UI", sans-serif;
+    min-height: 100vh;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     color: white;
+
     background:
-        linear-gradient(
-            rgba(45, 8, 32, .55),
-            rgba(80, 10, 50, .7)
+        radial-gradient(
+            circle at 70% 30%,
+            rgba(255, 90, 160, .35),
+            transparent 35%
         ),
-        url("images/20-10.png") center / cover fixed;
+        linear-gradient(
+            135deg,
+            #180713,
+            #55152f,
+            #9e315f,
+            #351022
+        );
 
     overflow-x: hidden;
 }
 
 
-/* =========================
+/* =========================================
    INTRO
-========================= */
+========================================= */
 
 #intro {
     position: fixed;
+
     inset: 0;
 
+    width: 100%;
+    height: 100%;
+
     display: flex;
-    justify-content: center;
+
     align-items: center;
+    justify-content: center;
+
+    text-align: center;
 
     background:
-        radial-gradient(circle at center,
-        #ff8dbd,
-        #8d2457 60%,
-        #260817);
+        radial-gradient(
+            circle at center,
+            #ff94bd 0%,
+            #9c2b5c 45%,
+            #250713 100%
+        );
 
-    z-index: 9999;
+    z-index: 99999;
 
-    transition: 1s;
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#intro.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .intro-content {
-    text-align: center;
+    position: relative;
 
-    animation: introFloat 3s ease-in-out infinite;
+    z-index: 100000;
+
+    width: min(90%, 700px);
+
+    animation:
+        introFloat 4s ease-in-out infinite;
 }
 
 .intro-heart {
-    font-size: 80px;
+    font-size: 90px;
 
-    animation: heartbeat 1.3s infinite;
+    margin-bottom: 10px;
+
+    animation:
+        heartbeat 1.2s infinite;
+}
+
+.intro-date {
+    font-size: 18px;
+
+    letter-spacing: 7px;
+
+    color: #ffd5e5;
+
+    margin-bottom: 10px;
 }
 
 .intro-content h1 {
-    font-size: 90px;
+    font-family: Georgia, serif;
 
-    background: linear-gradient(
-        90deg,
-        white,
-        #ffd1e4,
-        white
-    );
+    font-size:
+        clamp(38px, 7vw, 75px);
 
-    -webkit-background-clip: text;
-    color: transparent;
+    color: white;
 
-    letter-spacing: 8px;
+    text-shadow:
+        0 5px 25px rgba(255, 0, 100, .5);
 }
 
 .intro-content p {
-    font-size: 20px;
-    line-height: 1.7;
+    margin: 25px 0 35px;
 
-    margin: 20px 0 35px;
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: #ffe9f2;
 }
 
-#startBtn {
+
+/* =========================================
+   BUTTON
+========================================= */
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    font-family: inherit;
+}
+
+.main-button {
+    position: relative;
+
+    z-index: 10000;
+
     border: none;
 
-    padding: 16px 35px;
+    padding: 15px 30px;
 
     border-radius: 50px;
 
     color: white;
 
-    font-size: 17px;
+    background:
+        linear-gradient(
+            135deg,
+            #ff287c,
+            #ff70a9
+        );
 
-    background: linear-gradient(
-        135deg,
-        #ff4f91,
-        #ff1671
-    );
+    font-size: 16px;
+
+    font-weight: 600;
 
     cursor: pointer;
 
+    pointer-events: auto;
+
     box-shadow:
-        0 10px 30px rgba(255, 0, 110, .45);
+        0 10px 35px rgba(255, 20, 120, .4);
 
-    transition: .3s;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
 }
 
-#startBtn:hover {
-    transform: scale(1.08);
+.main-button:hover {
+    transform: translateY(-4px) scale(1.04);
+
+    box-shadow:
+        0 15px 40px rgba(255, 20, 120, .6);
+}
+
+.main-button:active {
+    transform: scale(.96);
 }
 
 
-/* =========================
+/* =========================================
    HEADER
-========================= */
+========================================= */
 
 header {
-    height: 65px;
-
     position: fixed;
+
     top: 0;
     left: 0;
     right: 0;
 
+    height: 65px;
+
     display: flex;
+
     align-items: center;
 
     padding: 0 35px;
 
-    background: rgba(35, 10, 27, .78);
+    background:
+        rgba(25, 5, 18, .75);
 
-    backdrop-filter: blur(15px);
+    border-bottom:
+        1px solid rgba(255,255,255,.12);
 
-    border-bottom: 1px solid rgba(255,255,255,.15);
+    backdrop-filter: blur(18px);
 
-    z-index: 100;
+    z-index: 5000;
+
+    pointer-events: auto;
 }
 
 .logo {
     display: flex;
-    gap: 15px;
 
     align-items: center;
 
+    gap: 12px;
+
     font-size: 22px;
+
     font-weight: bold;
 
-    color: #ff8db9;
+    color: #ff91ba;
 }
 
 .logo i {
@@ -156,33 +254,56 @@ header {
 .header-title {
     margin-left: 30px;
 
-    font-size: 20px;
+    color: #ffe2ec;
+
+    font-family: Georgia, serif;
 
     font-style: italic;
+
+    font-size: 18px;
 }
 
-#musicBtn {
+.music-button {
     margin-left: auto;
 
-    border: none;
+    display: flex;
 
-    color: white;
+    align-items: center;
 
-    background: rgba(255,255,255,.12);
+    gap: 8px;
 
-    padding: 10px 18px;
+    border: 1px solid
+        rgba(255,255,255,.2);
 
     border-radius: 30px;
 
+    padding: 10px 18px;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.1);
+
     cursor: pointer;
+
+    pointer-events: auto;
+
+    transition: .3s;
+}
+
+.music-button:hover {
+    background:
+        rgba(255,70,140,.4);
+
+    transform: scale(1.04);
 }
 
 
-/* =========================
-   NAV
-========================= */
+/* =========================================
+   SIDE NAV
+========================================= */
 
-nav {
+.side-nav {
     position: fixed;
 
     left: 20px;
@@ -194,423 +315,478 @@ nav {
 
     flex-direction: column;
 
-    gap: 18px;
+    gap: 15px;
 
-    z-index: 90;
+    z-index: 6000;
+
+    pointer-events: auto;
 }
 
-nav a {
-    width: 60px;
-    height: 60px;
+.side-nav a {
+    position: relative;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 
     border-radius: 50%;
 
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
+    color: white;
 
     text-decoration: none;
 
-    color: white;
+    background:
+        rgba(20, 4, 16, .65);
 
-    background: rgba(20, 5, 18, .5);
+    border:
+        1px solid rgba(255,255,255,.25);
 
-    border: 1px solid rgba(255,255,255,.25);
+    backdrop-filter: blur(12px);
 
-    backdrop-filter: blur(10px);
+    cursor: pointer;
 
-    transition: .3s;
+    pointer-events: auto;
+
+    transition:
+        transform .3s,
+        background .3s;
 }
 
-nav a i {
-    font-size: 20px;
+.side-nav a i {
+    color: #ff9fc5;
 
-    color: #ff9fc4;
+    font-size: 19px;
 }
 
-nav a span {
+.side-nav a span {
     position: absolute;
 
-    left: 75px;
+    left: 72px;
 
     white-space: nowrap;
 
+    padding: 7px 12px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(30, 5, 20, .9);
+
     opacity: 0;
+
+    visibility: hidden;
 
     transform: translateX(-10px);
 
     transition: .3s;
-
-    pointer-events: none;
 }
 
-nav a:hover {
-    background: #ec357b;
+.side-nav a:hover {
+    background: #ed327b;
 
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-nav a:hover span {
+.side-nav a:hover span {
     opacity: 1;
+
+    visibility: visible;
 
     transform: translateX(0);
 }
 
 
-/* =========================
+/* =========================================
    HERO
-========================= */
+========================================= */
 
 .hero {
-    min-height: 100vh;
+    position: relative;
 
-    padding: 130px 8% 80px;
+    min-height: 100vh;
 
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        minmax(300px, 1fr)
+        minmax(350px, 1fr);
 
     align-items: center;
 
-    gap: 70px;
+    gap: 50px;
+
+    padding:
+        120px
+        8%
+        80px;
 }
 
 
-/* HOA */
+/* =========================================
+   FLOWER AREA
+========================================= */
 
-.flower-box {
-    min-height: 600px;
-
+.flower-area {
     position: relative;
+
+    min-height: 570px;
 
     display: flex;
 
-    justify-content: center;
     align-items: center;
+
+    justify-content: center;
 }
 
-.glow {
+.pink-glow {
     position: absolute;
 
-    width: 430px;
-    height: 430px;
+    width: 420px;
+    height: 420px;
 
     border-radius: 50%;
 
-    background: #ff72ac;
+    background: #ff4f9c;
 
     filter: blur(100px);
 
     opacity: .3;
+
+    animation:
+        glowPulse 4s infinite;
+}
+
+.flower-card {
+    position: relative;
+
+    width: 450px;
+    height: 450px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 154, 196, .2),
+            transparent 65%
+        );
+
+    animation:
+        bouquetFloat 4s infinite ease-in-out;
 }
 
 .bouquet {
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 
-    font-size: 180px;
+    font-size: 145px;
 
-    letter-spacing: -50px;
+    letter-spacing: -40px;
 
     filter:
-        drop-shadow(0 20px 20px rgba(0,0,0,.3));
-
-    animation: bouquetFloat 4s ease-in-out infinite;
+        drop-shadow(
+            0 20px 25px
+            rgba(0,0,0,.35)
+        );
 }
 
-.flower-message {
+.flower-note {
     position: absolute;
 
-    top: 80px;
-    right: 5%;
+    top: 30px;
+    right: 0;
 
-    padding: 20px;
+    z-index: 10;
 
-    background: rgba(255,245,250,.9);
+    padding: 18px 25px;
 
-    color: #a62d5e;
+    color: #8b3157;
 
-    transform: rotate(-6deg);
+    background:
+        rgba(255,245,249,.94);
 
-    font-size: 18px;
+    border-radius: 5px;
+
+    font-family: Georgia, serif;
+
+    font-size: 17px;
+
+    line-height: 1.5;
 
     font-style: italic;
 
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    text-align: center;
+
+    transform: rotate(-6deg);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.25);
 }
 
 .ribbon {
     position: absolute;
 
-    bottom: 80px;
+    z-index: 15;
 
-    font-size: 100px;
+    bottom: 35px;
 
-    z-index: 3;
+    font-size: 85px;
 }
 
 .cute-cat {
     position: absolute;
 
+    z-index: 20;
+
     bottom: 10px;
     left: 5%;
 
-    font-size: 100px;
+    font-size: 90px;
 
-    animation: catFloat 3s infinite ease-in-out;
+    animation:
+        catFloat 3s infinite ease-in-out;
+}
+
+.cute-cat span {
+    display: inline-block;
+
+    font-size: 35px;
+
+    animation:
+        heartbeat 1.2s infinite;
 }
 
 
-/* =========================
-   CONTENT
-========================= */
+/* =========================================
+   HERO CONTENT
+========================================= */
 
-.content {
+.hero-content {
+    position: relative;
+
+    z-index: 10;
+
     text-align: center;
 
-    animation: contentAppear 1.5s ease;
+    animation:
+        contentAppear 1.2s ease;
 }
 
-.small-title {
-    font-family: cursive;
+.script-title {
+    font-family: Georgia, serif;
 
-    font-size: 32px;
+    font-size: 31px;
+
+    font-style: italic;
 
     color: #ffc0d9;
 }
 
-.content h1 {
-    margin-top: 10px;
+.hero-content h1 {
+    margin-top: 8px;
 
-    font-family: cursive;
+    font-family: Georgia, serif;
 
-    font-size: clamp(50px, 6vw, 90px);
+    font-size:
+        clamp(45px, 5.5vw, 78px);
 
-    line-height: 1;
+    line-height: .95;
 
     text-shadow:
-        0 5px 20px rgba(255, 20, 120, .5);
+        0 10px 30px
+        rgba(255,20,120,.35);
 }
 
-.content h1 strong {
+.hero-content h1 span {
     display: block;
 
-    font-size: 1.2em;
+    margin-top: 15px;
 
     color: #fff;
 
-    margin-top: 10px;
+    font-size: 1.15em;
 }
 
-.line {
-    margin: 25px;
+.heart-divider {
+    display: flex;
 
-    font-size: 30px;
+    align-items: center;
+    justify-content: center;
 
-    color: #ffbad5;
+    gap: 15px;
+
+    margin: 25px 0;
+
+    color: #ffb3d0;
+
+    font-size: 25px;
 }
 
-.description {
-    font-size: 23px;
+.heart-divider span {
+    width: 70px;
+
+    height: 1px;
+
+    background:
+        rgba(255,255,255,.6);
+}
+
+.hero-subtitle {
+    font-size: 22px;
 
     font-weight: 600;
 
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
-.message {
+.hero-text {
     max-width: 650px;
 
-    margin: auto;
+    margin: 7px auto;
+
+    font-size: 16px;
 
     line-height: 1.8;
 
-    font-size: 17px;
-
-    opacity: .9;
-}
-
-.divider {
-    margin: 25px;
-
-    color: #ffb6d3;
+    color: #ffe8f0;
 }
 
 
-/* =========================
+/* =========================================
    WISH CARD
-========================= */
+========================================= */
 
 .wish-card {
-    max-width: 600px;
+    position: relative;
 
-    margin: 30px auto 0;
+    max-width: 620px;
 
-    padding: 25px;
+    margin: 28px auto 0;
+
+    padding: 23px;
 
     border-radius: 25px;
 
-    background: rgba(255, 210, 230, .17);
+    background:
+        rgba(255, 205, 225, .16);
 
-    border: 1px solid rgba(255,255,255,.45);
+    border:
+        1px solid rgba(255,255,255,.4);
 
     backdrop-filter: blur(18px);
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.25);
+        0 20px 70px
+        rgba(0,0,0,.2);
 
-    transition: .4s;
+    transition:
+        transform .4s,
+        box-shadow .4s;
 }
 
 .wish-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-7px);
 
     box-shadow:
-        0 30px 80px rgba(255, 50, 130, .3);
+        0 30px 80px
+        rgba(255,60,140,.25);
 }
 
-.wish-header {
+.wish-title {
     display: flex;
 
     justify-content: space-between;
+    align-items: center;
 
-    font-size: 20px;
+    margin-bottom: 17px;
+
+    font-size: 19px;
 
     font-weight: bold;
 
-    margin-bottom: 20px;
+    color: #fff;
 }
 
-.wish-card p {
+.wish-title i {
+    color: #ff9bc2;
+}
+
+.wish-message {
     padding: 20px;
 
     border-radius: 18px;
 
-    background: rgba(255,255,255,.7);
+    background:
+        rgba(255,255,255,.85);
 
-    color: #602040;
-
-    line-height: 1.7;
+    color: #61203e;
 
     text-align: left;
+
+    line-height: 1.7;
 }
 
-#wishBtn,
-#fireworkBtn {
-    margin-top: 20px;
+.wish-button {
+    position: relative;
+
+    z-index: 100;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    padding: 13px 25px;
 
     border: none;
-
-    padding: 14px 30px;
 
     border-radius: 40px;
 
     color: white;
 
-    background: linear-gradient(
-        90deg,
-        #ff2078,
-        #ff69a4
-    );
-
-    font-size: 16px;
+    background:
+        linear-gradient(
+            90deg,
+            #ed176d,
+            #ff66a0
+        );
 
     cursor: pointer;
 
-    box-shadow:
-        0 8px 25px rgba(255, 30, 120, .4);
+    pointer-events: auto;
 
     transition: .3s;
 }
 
-#wishBtn:hover,
-#fireworkBtn:hover {
-    transform: scale(1.07);
+.wish-button:hover {
+    transform: scale(1.06);
 }
 
 
-/* =========================
+/* =========================================
    SECTIONS
-========================= */
+========================================= */
 
-.extra-section,
-.memory-section {
+.section {
+    position: relative;
+
     min-height: 100vh;
 
     padding: 120px 8%;
 
-    text-align: center;
-
-    background: rgba(45, 8, 32, .5);
-}
-
-.extra-section h2,
-.memory-section h2 {
-    font-size: 45px;
-
-    margin-bottom: 50px;
-
-    font-family: cursive;
-}
-
-.flowers {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 30px;
-
-    max-width: 1000px;
-
-    margin: auto;
-}
-
-.flower-card {
-    padding: 40px 25px;
-
-    border-radius: 25px;
-
-    background: rgba(255,255,255,.1);
-
-    border: 1px solid rgba(255,255,255,.2);
-
-    backdrop-filter: blur(15px);
-
-    transition: .4s;
-}
-
-.flower-card:hover {
-    transform:
-        translateY(-15px)
-        rotate(2deg);
-}
-
-.flower-card div {
-    font-size: 80px;
-
-    margin-bottom: 20px;
-}
-
-.flower-card h3 {
-    font-size: 25px;
-
-    margin-bottom: 10px;
-}
-
-.flower-card p {
-    opacity: .8;
-
-    line-height: 1.6;
-}
-
-
-/* MEMORY */
-
-.memory-section {
     display: flex;
 
     flex-direction: column;
@@ -618,194 +794,387 @@ nav a:hover span {
     justify-content: center;
 
     align-items: center;
+
+    text-align: center;
+
+    background:
+        rgba(30, 5, 20, .35);
 }
 
-.memory-section p {
+.section-title p,
+.memory-small {
+    color: #ffabc9;
+
+    font-family: Georgia, serif;
+
+    font-size: 20px;
+
+    font-style: italic;
+}
+
+.section-title h2,
+.memory-section h2 {
+    margin-top: 10px;
+
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(38px, 5vw, 60px);
+}
+
+
+/* =========================================
+   FLOWER GRID
+========================================= */
+
+.flower-grid {
+    width: min(1100px, 100%);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    margin-top: 50px;
+}
+
+.flower-item {
+    padding: 40px 25px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.2);
+
+    backdrop-filter: blur(15px);
+
+    transition:
+        transform .4s,
+        background .4s;
+}
+
+.flower-item:hover {
+    transform:
+        translateY(-15px)
+        rotate(1deg);
+
+    background:
+        rgba(255,100,160,.16);
+}
+
+.flower-icon {
+    font-size: 80px;
+
+    margin-bottom: 15px;
+}
+
+.flower-item h3 {
+    font-size: 24px;
+
+    margin-bottom: 10px;
+}
+
+.flower-item p {
+    line-height: 1.7;
+
+    color: #ffdce9;
+}
+
+
+/* =========================================
+   MEMORY
+========================================= */
+
+.memory-section {
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,70,150,.18),
+            transparent 60%
+        );
+}
+
+.big-heart {
+    margin: 35px 0;
+
+    font-size: 140px;
+
+    filter:
+        drop-shadow(
+            0 15px 30px
+            rgba(255,0,100,.4)
+        );
+
+    animation:
+        heartbeat 1.2s infinite;
+}
+
+.quote {
+    max-width: 700px;
+
+    margin-bottom: 30px;
+
+    font-family: Georgia, serif;
+
     font-size: 25px;
 
     font-style: italic;
 
-    margin-bottom: 40px;
-}
-
-.big-heart {
-    font-size: 150px;
-
-    animation: heartbeat 1.2s infinite;
-}
-
-.memory-section h3 {
-    font-size: 30px;
-
-    margin-top: 30px;
+    color: #ffe1eb;
 }
 
 
-/* =========================
-   PETALS
-========================= */
-
-.petal {
-    position: fixed;
-
-    top: -50px;
-
-    z-index: 50;
-
-    pointer-events: none;
-
-    animation:
-        fall linear forwards;
-}
-
-@keyframes fall {
-
-    0% {
-        transform:
-            translateY(-50px)
-            rotate(0);
-    }
-
-    100% {
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-    }
-}
-
-
-/* =========================
+/* =========================================
    POPUP
-========================= */
+========================================= */
 
 .popup {
     position: fixed;
 
     inset: 0;
 
-    display: none;
+    display: flex;
 
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    background: rgba(0,0,0,.65);
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,.7);
 
     backdrop-filter: blur(10px);
 
-    z-index: 500;
+    z-index: 90000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .35s,
+        visibility .35s;
 }
 
 .popup.show {
-    display: flex;
+    opacity: 1;
 
-    animation: popupFade .4s;
+    visibility: visible;
+
+    pointer-events: auto;
 }
 
 .popup-box {
-    width: min(90%, 550px);
+    position: relative;
 
-    padding: 45px;
+    width: min(550px, 100%);
+
+    padding: 45px 35px;
+
+    border-radius: 30px;
 
     text-align: center;
 
-    border-radius: 30px;
+    color: #6b2142;
 
     background:
         linear-gradient(
             135deg,
-            #fff0f7,
-            #ffd3e6
+            #fff4f9,
+            #ffd4e5
         );
 
-    color: #702045;
-
     box-shadow:
-        0 30px 100px rgba(0,0,0,.5);
+        0 30px 100px
+        rgba(0,0,0,.55);
 
-    position: relative;
+    transform:
+        scale(.75)
+        translateY(30px);
 
-    animation: popupScale .5s;
+    transition:
+        transform .4s;
 }
 
-.close {
+.popup.show .popup-box {
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+.close-button {
     position: absolute;
 
-    right: 20px;
-    top: 15px;
+    top: 12px;
+    right: 18px;
+
+    width: 40px;
+    height: 40px;
 
     border: none;
 
-    background: none;
+    background: transparent;
 
-    font-size: 35px;
+    color: #9c315d;
 
-    color: #9d3564;
+    font-size: 32px;
+
+    line-height: 1;
 
     cursor: pointer;
+
+    z-index: 100;
 }
 
 .popup-heart {
-    font-size: 80px;
+    font-size: 75px;
 
-    animation: heartbeat 1s infinite;
+    animation:
+        heartbeat 1.2s infinite;
+}
+
+.popup-small {
+    margin-top: 10px;
+
+    color: #a84469;
+
+    font-style: italic;
 }
 
 .popup-box h2 {
-    font-size: 30px;
+    margin-top: 10px;
 
-    margin: 20px 0;
+    font-family: Georgia, serif;
+
+    font-size: 35px;
 }
 
-.popup-box p {
+.popup-line {
+    margin: 15px;
+
+    font-size: 25px;
+
+    color: #e94782;
+}
+
+.popup-text {
     line-height: 1.8;
 
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .popup-flowers {
-    font-size: 35px;
+    margin: 20px 0;
 
-    margin: 25px 0;
+    font-size: 32px;
 }
 
 
-/* =========================
+/* =========================================
+   PETALS
+========================================= */
+
+#petals {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1000;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+
+    top: -50px;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    animation:
+        petalFall linear forwards;
+}
+
+
+/* =========================================
    FIREWORK
-========================= */
+========================================= */
 
 #fireworks {
     position: fixed;
 
     inset: 0;
 
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
 
-    z-index: 1000;
+    z-index: 95000;
+
+    pointer-events: none !important;
 }
 
 
-/* =========================
+/* =========================================
+   CLICK HEART
+========================================= */
+
+.click-heart {
+    position: fixed;
+
+    z-index: 99000;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    font-size: 22px;
+
+    transition:
+        transform 1s ease,
+        opacity 1s ease;
+}
+
+
+/* =========================================
    FOOTER
-========================= */
+========================================= */
 
 footer {
     padding: 30px;
 
     text-align: center;
 
-    background: #250918;
+    background:
+        #1d0712;
 
-    color: #ffb6d3;
+    color: #ffb1cb;
+
+    line-height: 1.8;
 }
 
 
-/* =========================
-   ANIMATION
-========================= */
+/* =========================================
+   ANIMATIONS
+========================================= */
 
 @keyframes heartbeat {
 
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1);
     }
 
@@ -816,34 +1185,57 @@ footer {
 
 @keyframes introFloat {
 
-    0%,100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-15px);
+        transform: translateY(-12px);
     }
 }
 
 @keyframes bouquetFloat {
 
-    0%,100% {
-        transform: translateY(0) rotate(-2deg);
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
     }
 
     50% {
-        transform: translateY(-15px) rotate(2deg);
+        transform:
+            translateY(-15px)
+            rotate(2deg);
     }
 }
 
 @keyframes catFloat {
 
-    0%,100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: .2;
+
+        transform: scale(.9);
+    }
+
+    50% {
+        opacity: .4;
+
+        transform: scale(1.1);
     }
 }
 
@@ -851,117 +1243,184 @@ footer {
 
     from {
         opacity: 0;
-        transform: translateY(40px);
+
+        transform:
+            translateY(40px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
-@keyframes popupFade {
+@keyframes petalFall {
 
-    from {
-        opacity: 0;
+    0% {
+        transform:
+            translateY(-60px)
+            rotate(0deg);
     }
 
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes popupScale {
-
-    from {
-        transform: scale(.7);
-    }
-
-    to {
-        transform: scale(1);
+    100% {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
     }
 }
 
 
-/* =========================
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
 @media (max-width: 900px) {
-
-    .hero {
-        grid-template-columns: 1fr;
-
-        padding-top: 110px;
-    }
-
-    .flower-box {
-        min-height: 400px;
-    }
-
-    nav {
-        left: 8px;
-    }
-
-    nav a {
-        width: 48px;
-        height: 48px;
-    }
-
-    nav a span {
-        display: none;
-    }
-
-    .flowers {
-        grid-template-columns: 1fr;
-    }
 
     .header-title {
         display: none;
     }
 
-    .content h1 {
-        font-size: 55px;
-    }
-
-    .flower-message {
-        right: 0;
-    }
-}
-
-@media (max-width: 500px) {
-
-    header {
-        padding: 0 15px;
-    }
-
-    .logo span {
-        font-size: 18px;
-    }
-
     .hero {
-        padding-left: 60px;
-        padding-right: 20px;
+        grid-template-columns: 1fr;
+
+        padding:
+            110px
+            30px
+            70px;
+
+        gap: 20px;
+    }
+
+    .flower-area {
+        min-height: 400px;
+    }
+
+    .flower-card {
+        width: 350px;
+        height: 350px;
     }
 
     .bouquet {
         font-size: 110px;
     }
 
+    .flower-note {
+        top: 0;
+        right: -10px;
+
+        font-size: 14px;
+    }
+
+    .flower-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .side-nav {
+        left: 8px;
+    }
+
+    .side-nav a {
+        width: 47px;
+        height: 47px;
+    }
+
+    .side-nav a span {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 52px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 0 15px;
+    }
+
+    .music-button span {
+        display: none;
+    }
+
+    .hero {
+        padding-left: 60px;
+        padding-right: 15px;
+    }
+
+    .flower-area {
+        min-height: 330px;
+    }
+
+    .flower-card {
+        width: 280px;
+        height: 280px;
+    }
+
+    .bouquet {
+        font-size: 80px;
+
+        letter-spacing: -25px;
+    }
+
     .cute-cat {
-        font-size: 60px;
+        font-size: 55px;
     }
 
-    .content h1 {
-        font-size: 45px;
+    .ribbon {
+        font-size: 55px;
     }
 
-    .small-title {
+    .flower-note {
+        padding: 10px;
+
+        font-size: 12px;
+    }
+
+    .script-title {
         font-size: 25px;
     }
 
-    .message {
-        font-size: 15px;
+    .hero-content h1 {
+        font-size: 42px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+    }
+
+    .hero-text {
+        font-size: 14px;
+    }
+
+    .wish-card {
+        padding: 15px;
+    }
+
+    .section {
+        padding:
+            100px
+            60px
+            80px
+            65px;
+    }
+
+    .big-heart {
+        font-size: 100px;
+    }
+
+    .quote {
+        font-size: 20px;
+    }
+
+    .popup-box {
+        padding:
+            40px
+            20px
+            30px;
     }
 }
 ```
