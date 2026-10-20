@@ -1,467 +1,420 @@
-document.addEventListener("DOMContentLoaded", function () {
+/* =====================================================
+   20/10 PRO JAVASCRIPT
+===================================================== */
 
-    console.log("20/10 website loaded successfully");
+document.addEventListener("DOMContentLoaded", () => {
 
-
-    /* =========================================
-       ELEMENTS
-    ========================================= */
-
-    const intro =
-        document.getElementById("intro");
-
-    const startBtn =
-        document.getElementById("startBtn");
-
-    const musicBtn =
-        document.getElementById("musicBtn");
-
-    const music =
-        document.getElementById("music");
-
-    const wishBtn =
-        document.getElementById("wishBtn");
-
-    const memoryBtn =
-        document.getElementById("memoryBtn");
-
-    const giftBtn =
-        document.getElementById("giftBtn");
-
-    const popup =
-        document.getElementById("popup");
-
-    const closePopup =
-        document.getElementById("closePopup");
-
-    const fireworkBtn =
-        document.getElementById("fireworkBtn");
-
-    const petals =
-        document.getElementById("petals");
-
-    const canvas =
-        document.getElementById("fireworks");
-
-    const ctx =
-        canvas
-            ? canvas.getContext("2d")
-            : null;
-
-
-    /* =========================================
-       OPEN GIFT
-       
-       Có cả onclick trong HTML.
-       Phần này chỉ hỗ trợ thêm.
-    ========================================= */
-
-    if (startBtn) {
-
-        startBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                console.log(
-                    "startBtn clicked"
-                );
-
-                if (typeof window.openGift === "function") {
-                    window.openGift();
-                }
-
-                startEffects();
-
-            }
-        );
-
-    }
-
-
-    /* =========================================
-       START EFFECTS
-    ========================================= */
-
-    let effectsStarted = false;
-
-    function startEffects() {
-
-        if (effectsStarted) {
-            return;
-        }
-
-        effectsStarted = true;
-
-        createPetals();
-
-        setTimeout(
-            function () {
-                createPetals();
-            },
-            1500
-        );
-
-    }
-
-
-    /* =========================================
-       PETALS
-    ========================================= */
-
-    function createPetals() {
-
-        if (!petals) {
-            return;
-        }
-
-        const flowerEmojis = [
-            "🌸",
-            "🌷",
-            "🌹",
-            "💮",
-            "💗"
-        ];
-
-        for (
-            let i = 0;
-            i < 12;
-            i++
-        ) {
-
-            const petal =
-                document.createElement("div");
-
-            petal.className = "petal";
-
-            petal.textContent =
-                flowerEmojis[
-                    Math.floor(
-                        Math.random()
-                        *
-                        flowerEmojis.length
-                    )
-                ];
-
-            const size =
-                15 +
-                Math.random() * 22;
-
-            const left =
-                Math.random() * 100;
-
-            const duration =
-                5 +
-                Math.random() * 7;
-
-            const delay =
-                Math.random() * 4;
-
-            petal.style.left =
-                left + "%";
-
-            petal.style.fontSize =
-                size + "px";
-
-            petal.style.animationDuration =
-                duration + "s";
-
-            petal.style.animationDelay =
-                delay + "s";
-
-            petals.appendChild(petal);
-
-            setTimeout(
-                function () {
-
-                    if (petal.parentNode) {
-                        petal.remove();
-                    }
-
-                },
-                (duration + delay + 1) * 1000
-            );
-
-        }
-
-    }
-
-
-    /* =========================================
-       POPUP
-    ========================================= */
-
-    function showPopup() {
-
-        if (!popup) {
-            return;
-        }
-
-        popup.classList.add("show");
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-
-
-    function hidePopup() {
-
-        if (!popup) {
-            return;
-        }
-
-        popup.classList.remove("show");
-
-        document.body.style.overflow =
-            "";
-
-    }
-
-
-    /* WISH BUTTON */
-
-    if (wishBtn) {
-
-        wishBtn.addEventListener(
-            "click",
-            function () {
-
-                showPopup();
-
-            }
-        );
-
-    }
-
-
-    /* MEMORY BUTTON */
-
-    if (memoryBtn) {
-
-        memoryBtn.addEventListener(
-            "click",
-            function () {
-
-                showPopup();
-
-                launchFireworks();
-
-            }
-        );
-
-    }
-
-
-    /* GIFT BUTTON */
-
-    if (giftBtn) {
-
-        giftBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                showPopup();
-
-                launchFireworks();
-
-            }
-        );
-
-    }
-
-
-    /* CLOSE */
-
-    if (closePopup) {
-
-        closePopup.addEventListener(
-            "click",
-            function () {
-
-                hidePopup();
-
-            }
-        );
-
-    }
-
-
-    /* CLICK OUTSIDE POPUP */
-
-    if (popup) {
-
-        popup.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target === popup
-                ) {
-
-                    hidePopup();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* ESC */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                hidePopup();
-
-            }
-
-        }
-    );
-
-
-    /* =========================================
-       FIREWORK BUTTON
-    ========================================= */
-
-    if (fireworkBtn) {
-
-        fireworkBtn.addEventListener(
-            "click",
-            function () {
-
-                launchFireworks();
-
-                createHeartBurst();
-
-            }
-        );
-
-    }
-
-
-    /* =========================================
-       MUSIC
-    ========================================= */
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
 
     let musicPlaying = false;
 
+    /* =================================================
+       PETALS
+    ================================================= */
 
-    function updateMusicButton() {
+    createPetals();
 
-        if (!musicBtn) {
-            return;
+    function createPetals() {
+
+        const container = document.getElementById("petals");
+
+        if (!container) return;
+
+        const symbols = ["🌸", "🌷", "💮", "♥"];
+
+        for (let i = 0; i < 35; i++) {
+
+            const petal = document.createElement("div");
+
+            petal.className = "petal";
+
+            petal.innerHTML =
+                symbols[Math.floor(Math.random() * symbols.length)];
+
+            petal.style.left =
+                Math.random() * 100 + "%";
+
+            petal.style.animationDuration =
+                7 + Math.random() * 8 + "s";
+
+            petal.style.animationDelay =
+                Math.random() * 8 + "s";
+
+            petal.style.opacity =
+                .25 + Math.random() * .55;
+
+            petal.style.fontSize =
+                10 + Math.random() * 14 + "px";
+
+            container.appendChild(petal);
         }
+    }
+
+
+    /* =================================================
+       SPARKLES
+    ================================================= */
+
+    createSparkles();
+
+    function createSparkles() {
+
+        const container =
+            document.getElementById("sparkles");
+
+        if (!container) return;
+
+        for (let i = 0; i < 45; i++) {
+
+            const sparkle =
+                document.createElement("span");
+
+            sparkle.className = "sparkle";
+
+            sparkle.style.left =
+                Math.random() * 100 + "%";
+
+            sparkle.style.top =
+                Math.random() * 100 + "%";
+
+            sparkle.style.animationDelay =
+                Math.random() * 3 + "s";
+
+            container.appendChild(sparkle);
+        }
+    }
+
+
+    /* =================================================
+       START EFFECTS
+    ================================================= */
+
+    window.startEffects = function () {
+
+        startTyping();
+
+        setTimeout(() => {
+            launchFirework(
+                window.innerWidth * .25,
+                window.innerHeight * .25
+            );
+        }, 500);
+
+        setTimeout(() => {
+            launchFirework(
+                window.innerWidth * .75,
+                window.innerHeight * .3
+            );
+        }, 900);
+    };
+
+
+    /* =================================================
+       MUSIC
+    ================================================= */
+
+    window.playMusic = function () {
+
+        if (!music) return;
+
+        music.volume = 0.35;
+
+        music.play()
+            .then(() => {
+
+                musicPlaying = true;
+
+                updateMusicIcon();
+
+            })
+            .catch(() => {
+                console.log("Music chưa được phát.");
+            });
+    };
+
+
+    musicBtn?.addEventListener("click", () => {
+
+        if (!music) return;
 
         if (musicPlaying) {
 
-            musicBtn.innerHTML =
-                '<i class="fa-solid fa-volume-high"></i>' +
-                '<span>Đang phát</span>';
+            music.pause();
+
+            musicPlaying = false;
 
         } else {
 
-            musicBtn.innerHTML =
-                '<i class="fa-solid fa-music"></i>' +
-                '<span>Nhạc nền</span>';
-
+            music.play()
+                .then(() => {
+                    musicPlaying = true;
+                })
+                .catch(() => {
+                    alert("Bạn cần thêm file music.mp3 vào thư mục website.");
+                });
         }
 
+        updateMusicIcon();
+    });
+
+
+    function updateMusicIcon() {
+
+        if (!musicBtn) return;
+
+        musicBtn.innerHTML = musicPlaying
+            ? `<i class="fa-solid fa-volume-high"></i>`
+            : `<i class="fa-solid fa-volume-xmark"></i>`;
     }
 
 
-    if (musicBtn) {
+    /* =================================================
+       TYPING EFFECT
+    ================================================= */
 
-        musicBtn.addEventListener(
-            "click",
-            function () {
+    let typingStarted = false;
 
-                if (!music) {
-                    return;
-                }
+    function startTyping() {
 
-                if (musicPlaying) {
+        if (typingStarted) return;
 
-                    music.pause();
+        typingStarted = true;
 
-                    musicPlaying = false;
+        const textElement =
+            document.getElementById("typingText");
 
-                    updateMusicButton();
+        if (!textElement) return;
 
-                } else {
+        const text =
+            "Chúc bạn luôn xinh đẹp, luôn vui vẻ và luôn tự tin trên hành trình của riêng mình. Mong rằng mỗi ngày thức dậy đều có thật nhiều điều khiến bạn mỉm cười. Happy Women's Day! 💗";
 
-                    music.play()
-                        .then(
-                            function () {
+        let index = 0;
 
-                                musicPlaying =
-                                    true;
+        function type() {
 
-                                updateMusicButton();
+            if (index < text.length) {
 
-                            }
-                        )
-                        .catch(
-                            function (error) {
+                textElement.textContent +=
+                    text.charAt(index);
 
-                                console.log(
-                                    "Không thể phát nhạc:",
-                                    error
-                                );
+                index++;
 
-                            }
-                        );
+                setTimeout(type, 35);
+            }
+        }
 
-                }
+        type();
+    }
 
+
+    /* =================================================
+       POPUP
+    ================================================= */
+
+    window.showWish = function () {
+
+        const popup =
+            document.getElementById("popup");
+
+        const title =
+            document.getElementById("popupTitle");
+
+        const text =
+            document.getElementById("popupText");
+
+        if (!popup) return;
+
+        title.textContent =
+            "Một lời chúc dành cho bạn 💗";
+
+        text.textContent =
+            "Chúc bạn có một ngày 20/10 thật vui vẻ. " +
+            "Mong rằng bạn luôn giữ được nụ cười, " +
+            "sự tự tin và những điều đẹp đẽ trong trái tim.";
+
+        popup.classList.add("show");
+
+        heartBurst();
+    };
+
+
+    window.showSurprise = function () {
+
+        const popup =
+            document.getElementById("popup");
+
+        const title =
+            document.getElementById("popupTitle");
+
+        const text =
+            document.getElementById("popupText");
+
+        if (!popup) return;
+
+        title.textContent =
+            "Bất ngờ dành cho bạn 🎁";
+
+        text.textContent =
+            "Nếu hôm nay chưa có ai nói với bạn điều này " +
+            "thì hãy nhớ rằng: bạn rất đặc biệt. " +
+            "Hãy luôn yêu thương và trân trọng chính mình nhé! 💕";
+
+        popup.classList.add("show");
+
+        heartBurst();
+        launchMegaFireworks();
+    };
+
+
+    window.closePopup = function () {
+
+        const popup =
+            document.getElementById("popup");
+
+        if (popup) {
+            popup.classList.remove("show");
+        }
+    };
+
+
+    /* =================================================
+       ESCAPE
+    ================================================= */
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape") {
+            closePopup();
+        }
+
+    });
+
+
+    /* =================================================
+       SCROLL
+    ================================================= */
+
+    window.scrollToSection = function (id) {
+
+        const section =
+            document.getElementById(id);
+
+        if (!section) return;
+
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
+    };
+
+
+    /* =================================================
+       NAV ACTIVE
+    ================================================= */
+
+    const sections =
+        document.querySelectorAll("section[id]");
+
+    const navLinks =
+        document.querySelectorAll("nav a");
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (!entry.isIntersecting)
+                        return;
+
+                    navLinks.forEach(link => {
+
+                        link.classList.remove("active");
+
+                        if (
+                            link.getAttribute("href") ===
+                            "#" + entry.target.id
+                        ) {
+                            link.classList.add("active");
+                        }
+
+                    });
+
+                });
+
+            },
+            {
+                threshold: .4
             }
         );
 
-    }
+    sections.forEach(section => {
+        observer.observe(section);
+    });
 
 
-    /* =========================================
-       CLICK HEART
-    ========================================= */
+    /* =================================================
+       REVEAL
+    ================================================= */
 
-    document.addEventListener(
-        "click",
-        function (event) {
+    const revealItems =
+        document.querySelectorAll(
+            ".flower-card, .memory-item, .wish-card, .quote"
+        );
 
-            if (
-                event.target.closest(
-                    "button"
-                ) ||
-                event.target.closest(
-                    "a"
-                )
-            ) {
-                return;
+    revealItems.forEach(item => {
+        item.classList.add("reveal");
+    });
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+                    }
+
+                });
+
+            },
+            {
+                threshold: .15
             }
+        );
 
-            createClickHeart(
-                event.clientX,
-                event.clientY
-            );
+    revealItems.forEach(item => {
+        revealObserver.observe(item);
+    });
 
+
+    /* =================================================
+       CLICK HEART
+    ================================================= */
+
+    document.addEventListener("click", event => {
+
+        if (
+            event.target.closest("button") ||
+            event.target.closest("a")
+        ) {
+            return;
         }
-    );
+
+        createClickHeart(
+            event.clientX,
+            event.clientY
+        );
+    });
 
 
-    function createClickHeart(
-        x,
-        y
-    ) {
+    function createClickHeart(x, y) {
 
         const heart =
             document.createElement("div");
@@ -470,7 +423,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "click-heart";
 
         heart.textContent =
-            "💗";
+            Math.random() > .5
+                ? "♥"
+                : "♡";
 
         heart.style.left =
             x + "px";
@@ -478,55 +433,46 @@ document.addEventListener("DOMContentLoaded", function () {
         heart.style.top =
             y + "px";
 
-        document.body.appendChild(
-            heart
+        heart.style.setProperty(
+            "--x",
+            (Math.random() * 100 - 50) + "px"
         );
 
-        requestAnimationFrame(
-            function () {
-
-                heart.style.transform =
-                    "translateY(-80px) scale(1.5)";
-
-                heart.style.opacity =
-                    "0";
-
-            }
+        heart.style.setProperty(
+            "--y",
+            (-80 - Math.random() * 80) + "px"
         );
 
-        setTimeout(
-            function () {
+        document.body.appendChild(heart);
 
-                heart.remove();
-
-            },
-            1000
-        );
-
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
     }
 
 
-    /* =========================================
-       CANVAS
-    ========================================= */
+    /* =================================================
+       FIREWORK CANVAS
+    ================================================= */
+
+    const canvas =
+        document.getElementById("fireworks");
+
+    const ctx =
+        canvas?.getContext("2d");
 
     let particles = [];
 
-
     function resizeCanvas() {
 
-        if (!canvas) {
-            return;
-        }
+        if (!canvas) return;
 
         canvas.width =
             window.innerWidth;
 
         canvas.height =
             window.innerHeight;
-
     }
-
 
     resizeCanvas();
 
@@ -536,128 +482,62 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    /* =========================================
-       FIREWORK
-    ========================================= */
+    function launchFirework(x, y) {
 
-    function launchFireworks() {
-
-        if (!canvas || !ctx) {
-            return;
-        }
-
-        for (
-            let i = 0;
-            i < 5;
-            i++
-        ) {
-
-            setTimeout(
-                function () {
-
-                    createFirework();
-
-                },
-                i * 350
-            );
-
-        }
-
-    }
-
-
-    function createFirework() {
-
-        if (!canvas) {
-            return;
-        }
-
-        const x =
-            100 +
-            Math.random()
-            *
-            (canvas.width - 200);
-
-        const y =
-            80 +
-            Math.random()
-            *
-            (canvas.height * 0.45);
+        if (!ctx) return;
 
         const colors = [
-            "#ff4f9c",
-            "#ff9ec5",
-            "#ffd1e1",
+            "#ff5c93",
+            "#ff9fbd",
+            "#ffd166",
             "#ffffff",
-            "#ff6fa8"
+            "#c77dff"
         ];
 
         const color =
             colors[
                 Math.floor(
-                    Math.random()
-                    *
-                    colors.length
+                    Math.random() * colors.length
                 )
             ];
 
-        for (
-            let i = 0;
-            i < 55;
-            i++
-        ) {
+        for (let i = 0; i < 70; i++) {
 
             const angle =
-                Math.random()
-                *
-                Math.PI
-                *
-                2;
+                Math.PI * 2 *
+                (i / 70);
 
             const speed =
-                2 +
-                Math.random() * 5;
+                2 + Math.random() * 4;
 
             particles.push({
 
-                x: x,
-
-                y: y,
+                x,
+                y,
 
                 vx:
-                    Math.cos(angle)
-                    *
+                    Math.cos(angle) *
                     speed,
 
                 vy:
-                    Math.sin(angle)
-                    *
+                    Math.sin(angle) *
                     speed,
 
                 life: 1,
 
                 decay:
                     .012 +
-                    Math.random() * .015,
+                    Math.random() * .012,
 
-                color: color,
-
-                size:
-                    2 +
-                    Math.random() * 2
-
+                color
             });
-
         }
-
     }
 
 
     function animateFireworks() {
 
-        if (!canvas || !ctx) {
-            return;
-        }
+        if (!ctx || !canvas) return;
 
         ctx.clearRect(
             0,
@@ -666,154 +546,166 @@ document.addEventListener("DOMContentLoaded", function () {
             canvas.height
         );
 
-        for (
-            let i = particles.length - 1;
-            i >= 0;
-            i--
-        ) {
+        particles =
+            particles.filter(
+                particle =>
+                    particle.life > 0
+            );
 
-            const p =
-                particles[i];
+        particles.forEach(particle => {
 
-            p.x += p.vx;
+            particle.x += particle.vx;
 
-            p.y += p.vy;
+            particle.y += particle.vy;
 
-            p.vy += .04;
+            particle.vy += .04;
 
-            p.life -= p.decay;
+            particle.life -=
+                particle.decay;
 
             ctx.globalAlpha =
-                Math.max(
-                    0,
-                    p.life
-                );
+                particle.life;
+
+            ctx.fillStyle =
+                particle.color;
 
             ctx.beginPath();
 
             ctx.arc(
-                p.x,
-                p.y,
-                p.size,
+                particle.x,
+                particle.y,
+                2,
                 0,
                 Math.PI * 2
             );
 
-            ctx.fillStyle =
-                p.color;
-
             ctx.fill();
-
-            if (
-                p.life <= 0
-            ) {
-
-                particles.splice(
-                    i,
-                    1
-                );
-
-            }
-
-        }
+        });
 
         ctx.globalAlpha = 1;
 
         requestAnimationFrame(
             animateFireworks
         );
-
     }
-
 
     animateFireworks();
 
 
-    /* =========================================
+    /* =================================================
+       MEGA FIREWORKS
+    ================================================= */
+
+    window.launchMegaFireworks = function () {
+
+        if (!canvas) return;
+
+        const width =
+            window.innerWidth;
+
+        const height =
+            window.innerHeight;
+
+        launchFirework(
+            width * .2,
+            height * .25
+        );
+
+        setTimeout(() => {
+            launchFirework(
+                width * .5,
+                height * .2
+            );
+        }, 250);
+
+        setTimeout(() => {
+            launchFirework(
+                width * .8,
+                height * .25
+            );
+        }, 500);
+
+        setTimeout(() => {
+            launchFirework(
+                width * .35,
+                height * .35
+            );
+        }, 750);
+
+        setTimeout(() => {
+            launchFirework(
+                width * .65,
+                height * .35
+            );
+        }, 1000);
+    };
+
+
+    /* =================================================
        HEART BURST
-    ========================================= */
+    ================================================= */
 
-    function createHeartBurst() {
+    function heartBurst() {
 
-        for (
-            let i = 0;
-            i < 18;
-            i++
-        ) {
+        const symbols = [
+            "♥",
+            "♡",
+            "💗",
+            "💖",
+            "💕"
+        ];
 
-            const heart =
-                document.createElement(
-                    "div"
+        for (let i = 0; i < 25; i++) {
+
+            setTimeout(() => {
+
+                const heart =
+                    document.createElement("div");
+
+                heart.className =
+                    "click-heart";
+
+                heart.textContent =
+                    symbols[
+                        Math.floor(
+                            Math.random() *
+                            symbols.length
+                        )
+                    ];
+
+                heart.style.left =
+                    50 + "vw";
+
+                heart.style.top =
+                    50 + "vh";
+
+                heart.style.fontSize =
+                    16 +
+                    Math.random() * 25 +
+                    "px";
+
+                heart.style.setProperty(
+                    "--x",
+                    (Math.random() * 500 - 250) +
+                    "px"
                 );
 
-            heart.className =
-                "click-heart";
+                heart.style.setProperty(
+                    "--y",
+                    (Math.random() * 500 - 350) +
+                    "px"
+                );
 
-            heart.textContent =
-                Math.random() > .5
-                    ? "💗"
-                    : "💖";
+                document.body.appendChild(
+                    heart
+                );
 
-            heart.style.left =
-                (
-                    window.innerWidth / 2
-                    +
-                    (Math.random() - .5)
-                    * 250
-                )
-                + "px";
-
-            heart.style.top =
-                (
-                    window.innerHeight / 2
-                    +
-                    (Math.random() - .5)
-                    * 150
-                )
-                + "px";
-
-            document.body.appendChild(
-                heart
-            );
-
-            const x =
-                (Math.random() - .5)
-                * 250;
-
-            const y =
-                -50 -
-                Math.random() * 180;
-
-            requestAnimationFrame(
-                function () {
-
-                    heart.style.transform =
-                        `translate(${x}px, ${y}px) scale(1.5)`;
-
-                    heart.style.opacity =
-                        "0";
-
-                }
-            );
-
-            setTimeout(
-                function () {
-
+                setTimeout(() => {
                     heart.remove();
+                }, 1200);
 
-                },
-                1200
-            );
-
+            }, i * 35);
         }
-
     }
-
-
-    /* =========================================
-       INITIAL
-    ========================================= */
-
-    updateMusicButton();
 
 });
