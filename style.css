@@ -1,7 +1,3 @@
-/* =====================================================
-   RESET
-===================================================== */
-
 * {
     margin: 0;
     padding: 0;
@@ -31,15 +27,9 @@ button {
     font-family: inherit;
 }
 
-
-/* =====================================================
-   INTRO
-===================================================== */
-
 #intro {
     position: fixed;
     inset: 0;
-
     z-index: 999999;
 
     display: flex;
@@ -50,34 +40,26 @@ button {
         radial-gradient(circle at 50% 30%, rgba(255, 125, 170, .25), transparent 35%),
         linear-gradient(135deg, #3c1025, #7c234b, #42152d);
 
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
+    transition: opacity .8s ease, visibility .8s ease;
 }
 
 #intro.hide {
     opacity: 0;
     visibility: hidden;
-    pointer-events: none !important;
+    pointer-events: none;
 }
 
 .intro-content {
-    position: relative;
-    z-index: 1000000;
-
     width: min(90%, 650px);
-
     text-align: center;
-
     color: white;
-
-    animation: introAppear 1.2s ease;
+    animation: introAppear 1s ease;
 }
 
 @keyframes introAppear {
     from {
         opacity: 0;
-        transform: translateY(40px) scale(.9);
+        transform: translateY(35px) scale(.92);
     }
 
     to {
@@ -110,7 +92,7 @@ button {
 }
 
 @keyframes giftFloat {
-    0%, 100% {
+    0%,100% {
         transform: translateY(0) rotate(-3deg);
     }
 
@@ -123,16 +105,12 @@ button {
     letter-spacing: 5px;
     font-size: 12px;
     opacity: .7;
-    margin-bottom: 10px;
 }
 
 .intro-content h1 {
     font-family: "Dancing Script", cursive;
-
     font-size: clamp(90px, 17vw, 170px);
-
     line-height: .8;
-
     text-shadow:
         0 0 25px rgba(255, 120, 170, .6),
         0 0 60px rgba(255, 120, 170, .3);
@@ -144,35 +122,25 @@ button {
 
 .intro-content h2 {
     margin-top: 25px;
-
     font-size: clamp(20px, 4vw, 32px);
-
-    font-weight: 700;
 }
 
 .intro-text {
     margin: 20px 0 35px;
-
     line-height: 1.8;
-
     color: rgba(255,255,255,.75);
 }
 
 .main-button {
     position: relative;
-    z-index: 1000001;
+    z-index: 1000000;
 
     border: none;
-
     padding: 16px 32px;
 
     border-radius: 999px;
 
-    background: linear-gradient(
-        135deg,
-        #ff5c96,
-        #ff87b3
-    );
+    background: linear-gradient(135deg, #ff5c96, #ff87b3);
 
     color: white;
 
@@ -181,17 +149,13 @@ button {
 
     cursor: pointer;
 
-    box-shadow:
-        0 15px 35px rgba(255, 70, 130, .35);
+    box-shadow: 0 15px 35px rgba(255, 70, 130, .35);
 
     transition: .3s ease;
 }
 
 .main-button:hover {
     transform: translateY(-4px) scale(1.03);
-
-    box-shadow:
-        0 20px 45px rgba(255, 70, 130, .5);
 }
 
 .main-button i {
@@ -200,9 +164,7 @@ button {
 
 .scroll-hint {
     margin-top: 45px;
-
     opacity: .5;
-
     animation: bounce 1.5s infinite;
 }
 
@@ -212,23 +174,15 @@ button {
     }
 }
 
-
-/* =====================================================
-   EFFECT LAYERS
-===================================================== */
-
 #petals {
     position: fixed;
     inset: 0;
-
     z-index: 1000;
-
     pointer-events: none;
-
     overflow: hidden;
 }
 
-.petal {
+.falling-petal {
     position: absolute;
 
     width: 10px;
@@ -240,10 +194,10 @@ button {
 
     opacity: .65;
 
-    animation: fall linear infinite;
+    animation: fallingPetal linear infinite;
 }
 
-@keyframes fall {
+@keyframes fallingPetal {
     from {
         transform:
             translateY(-30px)
@@ -262,9 +216,7 @@ button {
 #sparkles {
     position: fixed;
     inset: 0;
-
     z-index: 900;
-
     pointer-events: none;
 }
 
@@ -284,7 +236,7 @@ button {
 }
 
 @keyframes sparkle {
-    0%, 100% {
+    0%,100% {
         opacity: 0;
         transform: scale(.5);
     }
@@ -298,16 +250,9 @@ button {
 #fireworks {
     position: fixed;
     inset: 0;
-
     z-index: 95000;
-
     pointer-events: none;
 }
-
-
-/* =====================================================
-   HEADER
-===================================================== */
 
 #header {
     position: fixed;
@@ -328,15 +273,13 @@ button {
     padding: 12px 18px;
 
     border: 1px solid rgba(255,255,255,.6);
-
     border-radius: 22px;
 
     background: rgba(255,255,255,.7);
 
     backdrop-filter: blur(20px);
 
-    box-shadow:
-        0 15px 40px rgba(120, 40, 70, .08);
+    box-shadow: 0 15px 40px rgba(120, 40, 70, .08);
 }
 
 .logo {
@@ -396,7 +339,6 @@ nav a i {
     border-radius: 50%;
 
     background: #ffe5ee;
-
     color: #d94375;
 
     cursor: pointer;
@@ -407,11 +349,6 @@ nav a i {
 .music-button:hover {
     transform: rotate(15deg) scale(1.08);
 }
-
-
-/* =====================================================
-   SIDE DECOR
-===================================================== */
 
 .side-decoration {
     position: fixed;
@@ -425,7 +362,6 @@ nav a i {
     gap: 18px;
 
     color: #f08aaa;
-
     opacity: .5;
 }
 
@@ -435,10 +371,6 @@ nav a i {
 
 .side-decoration.right {
     right: 25px;
-}
-
-.side-decoration span:nth-child(2) {
-    font-size: 12px;
 }
 
 .side-decoration span {
@@ -459,11 +391,6 @@ nav a i {
     }
 }
 
-
-/* =====================================================
-   SECTIONS
-===================================================== */
-
 .section {
     position: relative;
 
@@ -473,24 +400,15 @@ nav a i {
 
     min-height: 100vh;
 
-    padding:
-        140px 0
-        100px;
+    padding: 140px 0 100px;
 }
-
-
-/* =====================================================
-   HERO
-===================================================== */
 
 .hero {
     min-height: 100vh;
 
     display: grid;
 
-    grid-template-columns:
-        1.05fr
-        .95fr;
+    grid-template-columns: 1.05fr .95fr;
 
     align-items: center;
 
@@ -518,7 +436,6 @@ nav a i {
 .hero-label span {
     width: 25px;
     height: 1px;
-
     background: #d95a81;
 }
 
@@ -557,7 +474,6 @@ nav a i {
 .hero-buttons {
     display: flex;
     gap: 14px;
-
     margin-top: 35px;
 }
 
@@ -579,15 +495,9 @@ nav a i {
 
     color: white;
 
-    background:
-        linear-gradient(
-            135deg,
-            #e64f7d,
-            #fa8cae
-        );
+    background: linear-gradient(135deg, #e64f7d, #fa8cae);
 
-    box-shadow:
-        0 12px 30px rgba(230, 79, 125, .25);
+    box-shadow: 0 12px 30px rgba(230, 79, 125, .25);
 }
 
 .primary-button:hover {
@@ -606,17 +516,13 @@ nav a i {
     background: white;
 }
 
-
-/* =====================================================
-   HERO VISUAL
-===================================================== */
-
 .hero-visual {
     position: relative;
 
     height: 560px;
 
     display: grid;
+
     place-items: center;
 }
 
@@ -657,7 +563,7 @@ nav a i {
     }
 }
 
-.flower {
+.real-flower {
     position: absolute;
 
     width: 100px;
@@ -666,78 +572,81 @@ nav a i {
     border-radius: 50%;
 }
 
-.flower-1 {
-    top: 70px;
+.flower-one {
+    top: 60px;
     left: 105px;
 }
 
-.flower-2 {
-    top: 130px;
-    left: 30px;
-
-    transform: scale(.75);
-}
-
-.flower-3 {
+.flower-two {
     top: 135px;
-    right: 15px;
-
-    transform: scale(.8);
+    left: 30px;
+    transform: scale(.78);
 }
 
-.petal {
+.flower-three {
+    top: 130px;
+    right: 10px;
+    transform: scale(.82);
+}
+
+.flower-petal {
     position: absolute;
 
-    width: 55px;
-    height: 55px;
+    width: 58px;
+    height: 58px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff709d,
-            #ffb0c7
-        );
+    background: linear-gradient(135deg, #ff709d, #ffb0c7);
 
     border-radius: 50% 50% 45% 45%;
+
+    box-shadow: 0 4px 10px rgba(220,70,110,.12);
 }
 
-.petal.p1 {
+.fp1 {
     top: 0;
-    left: 22px;
+    left: 21px;
 }
 
-.petal.p2 {
-    top: 22px;
+.fp2 {
+    top: 20px;
     right: 0;
-    transform: rotate(90deg);
+    transform: rotate(72deg);
 }
 
-.petal.p3 {
+.fp3 {
     bottom: 0;
-    left: 22px;
-    transform: rotate(180deg);
+    right: 10px;
+    transform: rotate(144deg);
 }
 
-.petal.p4 {
-    top: 22px;
+.fp4 {
+    bottom: 0;
+    left: 10px;
+    transform: rotate(216deg);
+}
+
+.fp5 {
+    top: 20px;
     left: 0;
-    transform: rotate(270deg);
+    transform: rotate(288deg);
 }
 
-.center {
+.flower-center {
     position: absolute;
 
-    width: 34px;
-    height: 34px;
+    width: 35px;
+    height: 35px;
 
-    left: 33px;
-    top: 33px;
+    left: 32px;
+    top: 32px;
 
     border-radius: 50%;
 
     background: #ffd45c;
 
     box-shadow: 0 0 20px rgba(255, 200, 50, .4);
+
+    z-index: 3;
 }
 
 .leaf {
@@ -753,19 +662,19 @@ nav a i {
     opacity: .8;
 }
 
-.leaf-1 {
+.leaf-one {
     bottom: 90px;
     left: 50px;
     transform: rotate(35deg);
 }
 
-.leaf-2 {
+.leaf-two {
     bottom: 60px;
     right: 45px;
     transform: rotate(145deg);
 }
 
-.leaf-3 {
+.leaf-three {
     bottom: 120px;
     left: 130px;
     transform: rotate(85deg) scale(.7);
@@ -781,22 +690,20 @@ nav a i {
     animation: floatingHeart 3s ease-in-out infinite;
 }
 
-.heart-1 {
+.heart-one {
     top: 70px;
     left: 20px;
 }
 
-.heart-2 {
+.heart-two {
     top: 180px;
     right: 10px;
-
     animation-delay: 1s;
 }
 
-.heart-3 {
+.heart-three {
     bottom: 80px;
     left: 70px;
-
     animation-delay: 2s;
 }
 
@@ -805,11 +712,6 @@ nav a i {
         transform: translateY(-20px) rotate(10deg);
     }
 }
-
-
-/* =====================================================
-   SECTION HEADING
-===================================================== */
 
 .section-heading {
     display: flex;
@@ -856,16 +758,9 @@ nav a i {
 .section-number {
     font-size: 12px;
     font-weight: 800;
-
     color: #df668c;
-
     padding-top: 8px;
 }
-
-
-/* =====================================================
-   WISH
-===================================================== */
 
 .wish-section {
     display: flex;
@@ -876,9 +771,7 @@ nav a i {
 .wish-container {
     display: grid;
 
-    grid-template-columns:
-        1.15fr
-        .85fr;
+    grid-template-columns: 1.15fr .85fr;
 
     gap: 60px;
 
@@ -901,17 +794,11 @@ nav a i {
 
     border-radius: 30px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #fff,
-            #fff3f7
-        );
+    background: linear-gradient(145deg, #fff, #fff3f7);
 
     border: 1px solid #f7dce5;
 
-    box-shadow:
-        0 30px 80px rgba(170, 70, 100, .1);
+    box-shadow: 0 30px 80px rgba(170, 70, 100, .1);
 
     overflow: hidden;
 
@@ -994,7 +881,6 @@ nav a i {
 
 .cursor {
     color: #e75c87;
-
     animation: cursorBlink .8s infinite;
 }
 
@@ -1026,7 +912,6 @@ nav a i {
 
 .quote i {
     color: #ef8eaa;
-
     font-size: 30px;
 }
 
@@ -1042,7 +927,6 @@ nav a i {
 
 .quote span {
     font-size: 12px;
-
     color: #9c7585;
 }
 
@@ -1070,15 +954,8 @@ nav a i {
 
 .surprise-button:hover {
     transform: translateY(-4px);
-
-    box-shadow:
-        0 15px 30px rgba(200,80,120,.12);
+    box-shadow: 0 15px 30px rgba(200,80,120,.12);
 }
-
-
-/* =====================================================
-   FLOWERS
-===================================================== */
 
 .flowers-section {
     display: flex;
@@ -1089,15 +966,12 @@ nav a i {
 .flower-grid {
     display: grid;
 
-    grid-template-columns:
-        repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     gap: 20px;
 }
 
 .flower-card {
-    position: relative;
-
     overflow: hidden;
 
     border-radius: 25px;
@@ -1106,19 +980,15 @@ nav a i {
 
     border: 1px solid #f5d9e2;
 
-    box-shadow:
-        0 20px 50px rgba(170,80,110,.08);
+    box-shadow: 0 20px 50px rgba(170,80,110,.08);
 
     transition: .4s;
 }
 
 .flower-card:hover {
-    transform:
-        translateY(-10px)
-        rotate(-1deg);
+    transform: translateY(-10px) rotate(-1deg);
 
-    box-shadow:
-        0 30px 60px rgba(170,80,110,.15);
+    box-shadow: 0 30px 60px rgba(170,80,110,.15);
 }
 
 .flower-card-image {
@@ -1129,12 +999,7 @@ nav a i {
 
     font-size: 100px;
 
-    background:
-        radial-gradient(
-            circle,
-            #fff,
-            #fff0f5
-        );
+    background: radial-gradient(circle, #fff, #fff0f5);
 
     transition: .4s;
 }
@@ -1161,11 +1026,6 @@ nav a i {
     line-height: 1.7;
 }
 
-
-/* =====================================================
-   MEMORY
-===================================================== */
-
 .memory-section {
     display: flex;
     flex-direction: column;
@@ -1175,8 +1035,7 @@ nav a i {
 .memory-grid {
     display: grid;
 
-    grid-template-columns:
-        repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
 }
@@ -1188,12 +1047,11 @@ nav a i {
 
     border-radius: 25px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.9),
-            rgba(255,237,244,.75)
-        );
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.9),
+        rgba(255,237,244,.75)
+    );
 
     border: 1px solid #f5d8e1;
 
@@ -1207,13 +1065,11 @@ nav a i {
 .memory-item:hover {
     transform: translateY(-7px);
 
-    box-shadow:
-        0 25px 50px rgba(180,70,100,.1);
+    box-shadow: 0 25px 50px rgba(180,70,100,.1);
 }
 
 .memory-icon {
     font-size: 35px;
-
     margin-bottom: 18px;
 }
 
@@ -1223,16 +1079,9 @@ nav a i {
 
 .memory-item p {
     color: #8c6d79;
-
     line-height: 1.7;
-
     font-size: 14px;
 }
-
-
-/* =====================================================
-   FINAL
-===================================================== */
 
 .final-section {
     position: relative;
@@ -1249,12 +1098,7 @@ nav a i {
     overflow: hidden;
 
     background:
-        radial-gradient(
-            circle at center,
-            #ffbfd1,
-            #e96792 40%,
-            #682441 100%
-        );
+        radial-gradient(circle at center, #ffbfd1, #e96792 40%, #682441 100%);
 
     color: white;
 }
@@ -1282,15 +1126,12 @@ nav a i {
 
 .final-content {
     position: relative;
-
     z-index: 2;
-
     max-width: 800px;
 }
 
 .final-heart {
     font-size: 70px;
-
     animation: heartbeat 1.5s infinite;
 }
 
@@ -1352,14 +1193,8 @@ nav a i {
 
 .firework-button:hover {
     background: rgba(255,255,255,.22);
-
     transform: translateY(-4px);
 }
-
-
-/* =====================================================
-   POPUP
-===================================================== */
 
 .popup {
     position: fixed;
@@ -1386,7 +1221,6 @@ nav a i {
 
 .popup-overlay {
     position: absolute;
-
     inset: 0;
 
     background: rgba(50,10,30,.55);
@@ -1396,7 +1230,6 @@ nav a i {
 
 .popup-box {
     position: relative;
-
     z-index: 2;
 
     width: min(90%, 500px);
@@ -1409,8 +1242,7 @@ nav a i {
 
     background: #fff8fb;
 
-    box-shadow:
-        0 30px 100px rgba(40,10,25,.3);
+    box-shadow: 0 30px 100px rgba(40,10,25,.3);
 
     transform: translateY(30px) scale(.9);
 
@@ -1483,11 +1315,6 @@ nav a i {
     letter-spacing: 10px;
 }
 
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
 footer {
     padding: 60px 20px;
 
@@ -1500,9 +1327,7 @@ footer {
 
 .footer-heart {
     color: #ff759d;
-
     font-size: 30px;
-
     margin-bottom: 15px;
 }
 
@@ -1522,11 +1347,6 @@ footer small {
     color: rgba(255,255,255,.5);
 }
 
-
-/* =====================================================
-   CLICK HEART
-===================================================== */
-
 .click-heart {
     position: fixed;
 
@@ -1544,15 +1364,11 @@ footer small {
 @keyframes clickHeart {
     0% {
         opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(.5);
+        transform: translate(-50%, -50%) scale(.5);
     }
 
     100% {
         opacity: 0;
-
         transform:
             translate(
                 calc(-50% + var(--x)),
@@ -1562,31 +1378,16 @@ footer small {
     }
 }
 
-
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
-
 .reveal {
     opacity: 0;
-
     transform: translateY(40px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
+    transition: opacity .8s ease, transform .8s ease;
 }
 
 .reveal.visible {
     opacity: 1;
-
     transform: translateY(0);
 }
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
 
 @media (max-width: 900px) {
 
@@ -1628,8 +1429,7 @@ footer small {
     }
 
     .flower-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .memory-grid {
@@ -1641,14 +1441,11 @@ footer small {
     }
 }
 
-
 @media (max-width: 600px) {
 
     #header {
         top: 10px;
-
         width: 94%;
-
         padding: 10px 12px;
     }
 
@@ -1675,10 +1472,7 @@ footer small {
 
     .section {
         width: 90%;
-
-        padding:
-            110px 0
-            70px;
+        padding: 110px 0 70px;
     }
 
     .hero {
