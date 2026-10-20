@@ -4,58 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>20/10 - Một Món Quà Đặc Biệt 💗</title>
+    <title>20/10 | Happy Women's Day 💗</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= INTRO ================= -->
     <section id="intro">
         <div class="intro-stars"></div>
 
         <div class="intro-content">
-
             <div class="intro-icon">
                 <i class="fa-solid fa-gift"></i>
             </div>
 
-            <p class="intro-small">
-                MỘT MÓN QUÀ NHỎ
-            </p>
+            <p class="intro-small">MỘT MÓN QUÀ NHỎ</p>
 
-            <h1>
-                20<span>/</span>10
-            </h1>
+            <h1>20<span>/</span>10</h1>
 
-            <h2>
-                Ngày Phụ Nữ Việt Nam
-            </h2>
+            <h2>Ngày Phụ Nữ Việt Nam</h2>
 
             <p class="intro-text">
                 Một chút yêu thương,<br>
                 một chút ngọt ngào dành riêng cho bạn 💗
             </p>
 
-            <button
-                id="startBtn"
-                class="main-button"
-                type="button"
-                onclick="openGift()"
-            >
+            <button id="startBtn" class="main-button" type="button">
                 <i class="fa-solid fa-gift"></i>
                 Mở món quà
             </button>
@@ -66,20 +48,11 @@
         </div>
     </section>
 
-
-    <!-- ================= EFFECT LAYERS ================= -->
-
     <canvas id="fireworks"></canvas>
-
     <div id="petals"></div>
-
     <div id="sparkles"></div>
 
-
-    <!-- ================= HEADER ================= -->
-
     <header id="header">
-
         <div class="logo">
             <i class="fa-solid fa-heart"></i>
             <span>20/10</span>
@@ -108,13 +81,9 @@
         </nav>
 
         <button id="musicBtn" class="music-button" type="button">
-            <i class="fa-solid fa-volume-high"></i>
+            <i class="fa-solid fa-volume-xmark"></i>
         </button>
-
     </header>
-
-
-    <!-- ================= SIDE DECOR ================= -->
 
     <div class="side-decoration left">
         <span>♥</span>
@@ -128,20 +97,13 @@
         <span>♥</span>
     </div>
 
-
-    <!-- ================= MAIN ================= -->
-
     <main>
 
-        <!-- ================= HOME ================= -->
-
         <section id="home" class="hero section">
-
             <div class="hero-bg-circle circle-1"></div>
             <div class="hero-bg-circle circle-2"></div>
 
             <div class="hero-content">
-
                 <div class="hero-label">
                     <span></span>
                     HAPPY WOMEN'S DAY
@@ -160,125 +122,89 @@
                 </p>
 
                 <div class="hero-buttons">
-
-                    <button
-                        class="primary-button"
-                        onclick="showWish()"
-                    >
+                    <button class="primary-button" id="wishBtn">
                         <i class="fa-solid fa-heart"></i>
                         Nhận lời chúc
                     </button>
 
-                    <button
-                        class="secondary-button"
-                        onclick="scrollToSection('flowers')"
-                    >
+                    <button class="secondary-button" id="exploreBtn">
                         Khám phá
                         <i class="fa-solid fa-arrow-down"></i>
                     </button>
-
                 </div>
-
             </div>
 
-
             <div class="hero-visual">
-
                 <div class="glow"></div>
 
                 <div class="flower-bouquet">
 
-                    <div class="flower flower-1">
-                        <div class="petal p1"></div>
-                        <div class="petal p2"></div>
-                        <div class="petal p3"></div>
-                        <div class="petal p4"></div>
-                        <div class="center"></div>
+                    <div class="real-flower flower-one">
+                        <span class="flower-petal fp1"></span>
+                        <span class="flower-petal fp2"></span>
+                        <span class="flower-petal fp3"></span>
+                        <span class="flower-petal fp4"></span>
+                        <span class="flower-petal fp5"></span>
+                        <span class="flower-center"></span>
                     </div>
 
-                    <div class="flower flower-2">
-                        <div class="petal p1"></div>
-                        <div class="petal p2"></div>
-                        <div class="petal p3"></div>
-                        <div class="petal p4"></div>
-                        <div class="center"></div>
+                    <div class="real-flower flower-two">
+                        <span class="flower-petal fp1"></span>
+                        <span class="flower-petal fp2"></span>
+                        <span class="flower-petal fp3"></span>
+                        <span class="flower-petal fp4"></span>
+                        <span class="flower-petal fp5"></span>
+                        <span class="flower-center"></span>
                     </div>
 
-                    <div class="flower flower-3">
-                        <div class="petal p1"></div>
-                        <div class="petal p2"></div>
-                        <div class="petal p3"></div>
-                        <div class="petal p4"></div>
-                        <div class="center"></div>
+                    <div class="real-flower flower-three">
+                        <span class="flower-petal fp1"></span>
+                        <span class="flower-petal fp2"></span>
+                        <span class="flower-petal fp3"></span>
+                        <span class="flower-petal fp4"></span>
+                        <span class="flower-petal fp5"></span>
+                        <span class="flower-center"></span>
                     </div>
 
-                    <div class="leaf leaf-1"></div>
-                    <div class="leaf leaf-2"></div>
-                    <div class="leaf leaf-3"></div>
-
+                    <span class="leaf leaf-one"></span>
+                    <span class="leaf leaf-two"></span>
+                    <span class="leaf leaf-three"></span>
                 </div>
 
-                <div class="floating-heart heart-1">
-                    ♥
-                </div>
-
-                <div class="floating-heart heart-2">
-                    ♥
-                </div>
-
-                <div class="floating-heart heart-3">
-                    ♥
-                </div>
-
+                <div class="floating-heart heart-one">♥</div>
+                <div class="floating-heart heart-two">♥</div>
+                <div class="floating-heart heart-three">♥</div>
             </div>
-
         </section>
-
-
-        <!-- ================= WISH ================= -->
 
         <section id="wish" class="section wish-section">
 
             <div class="section-heading">
-
-                <span class="section-number">
-                    01
-                </span>
+                <span class="section-number">01</span>
 
                 <div>
                     <p>FROM THE HEART</p>
+
                     <h2>
                         Một lời chúc
                         <span>dành riêng cho bạn</span>
                     </h2>
                 </div>
-
             </div>
-
 
             <div class="wish-container">
 
                 <div class="wish-card">
-
-                    <div class="card-decoration top-left">
-                        ✿
-                    </div>
-
-                    <div class="card-decoration bottom-right">
-                        ✿
-                    </div>
+                    <div class="card-decoration top-left">✿</div>
+                    <div class="card-decoration bottom-right">✿</div>
 
                     <div class="wish-icon">
                         <i class="fa-solid fa-heart"></i>
                     </div>
 
-                    <p class="wish-date">
-                        20 . 10 . 2026
-                    </p>
+                    <p class="wish-date">20 . 10 . 2026</p>
 
-                    <h3>
-                        Happy Women's Day
-                    </h3>
+                    <h3>Happy Women's Day</h3>
 
                     <div class="typing-area">
                         <p id="typingText"></p>
@@ -288,9 +214,7 @@
                     <div class="card-signature">
                         With lots of love 💗
                     </div>
-
                 </div>
-
 
                 <div class="wish-side">
 
@@ -306,30 +230,19 @@
                         <span>— Một lời nhắn nhỏ</span>
                     </div>
 
-                    <button
-                        class="surprise-button"
-                        onclick="showSurprise()"
-                    >
+                    <button class="surprise-button" id="surpriseBtn">
                         <span>🎁</span>
                         Bật mí điều bất ngờ
                     </button>
 
                 </div>
-
             </div>
-
         </section>
-
-
-        <!-- ================= FLOWERS ================= -->
 
         <section id="flowers" class="section flowers-section">
 
             <div class="section-heading center">
-
-                <span class="section-number">
-                    02
-                </span>
+                <span class="section-number">02</span>
 
                 <div>
                     <p>A LITTLE FLOWER</p>
@@ -339,97 +252,65 @@
                         <span>đầy yêu thương</span>
                     </h2>
                 </div>
-
             </div>
-
 
             <div class="flower-grid">
 
                 <article class="flower-card">
-
-                    <div class="flower-card-image rose">
-                        🌹
-                    </div>
+                    <div class="flower-card-image">🌹</div>
 
                     <div class="flower-card-content">
                         <h3>Hoa Hồng</h3>
-
                         <p>
                             Tượng trưng cho tình yêu,
                             sự trân trọng và vẻ đẹp.
                         </p>
                     </div>
-
                 </article>
 
-
                 <article class="flower-card">
-
-                    <div class="flower-card-image tulip">
-                        🌷
-                    </div>
+                    <div class="flower-card-image">🌷</div>
 
                     <div class="flower-card-content">
                         <h3>Hoa Tulip</h3>
-
                         <p>
                             Đại diện cho sự thanh lịch,
                             dịu dàng và hạnh phúc.
                         </p>
                     </div>
-
                 </article>
 
-
                 <article class="flower-card">
-
-                    <div class="flower-card-image sunflower">
-                        🌻
-                    </div>
+                    <div class="flower-card-image">🌻</div>
 
                     <div class="flower-card-content">
                         <h3>Hoa Hướng Dương</h3>
-
                         <p>
                             Luôn hướng về ánh sáng,
                             niềm vui và những điều tốt đẹp.
                         </p>
                     </div>
-
                 </article>
 
-
                 <article class="flower-card">
-
-                    <div class="flower-card-image sakura">
-                        🌸
-                    </div>
+                    <div class="flower-card-image">🌸</div>
 
                     <div class="flower-card-content">
                         <h3>Hoa Anh Đào</h3>
-
                         <p>
                             Vẻ đẹp nhẹ nhàng,
                             trong trẻo và đầy hy vọng.
                         </p>
                     </div>
-
                 </article>
 
             </div>
-
         </section>
-
-
-        <!-- ================= MEMORY ================= -->
 
         <section id="memory" class="section memory-section">
 
             <div class="section-heading">
-
-                <span class="section-number">
-                    03
-                </span>
+                <span class="section-number">03</span>
 
                 <div>
                     <p>SWEET MOMENTS</p>
@@ -439,100 +320,63 @@
                         <span>đáng nhớ</span>
                     </h2>
                 </div>
-
             </div>
-
 
             <div class="memory-grid">
 
                 <div class="memory-item large">
+                    <div class="memory-icon">✨</div>
 
-                    <div class="memory-icon">
-                        ✨
-                    </div>
-
-                    <h3>
-                        Luôn tỏa sáng
-                    </h3>
+                    <h3>Luôn tỏa sáng</h3>
 
                     <p>
                         Hãy luôn là chính mình,
                         tự tin và tỏa sáng theo cách
                         riêng của bạn.
                     </p>
-
                 </div>
 
-
                 <div class="memory-item">
+                    <div class="memory-icon">🌷</div>
 
-                    <div class="memory-icon">
-                        🌷
-                    </div>
-
-                    <h3>
-                        Luôn xinh đẹp
-                    </h3>
+                    <h3>Luôn xinh đẹp</h3>
 
                     <p>
                         Không chỉ ở vẻ ngoài,
                         mà còn ở trái tim.
                     </p>
-
                 </div>
 
-
                 <div class="memory-item">
+                    <div class="memory-icon">💫</div>
 
-                    <div class="memory-icon">
-                        💫
-                    </div>
-
-                    <h3>
-                        Luôn hạnh phúc
-                    </h3>
+                    <h3>Luôn hạnh phúc</h3>
 
                     <p>
                         Mong những điều tốt đẹp
                         luôn tìm đến bạn.
                     </p>
-
                 </div>
 
-
                 <div class="memory-item">
+                    <div class="memory-icon">💗</div>
 
-                    <div class="memory-icon">
-                        💗
-                    </div>
-
-                    <h3>
-                        Luôn được yêu thương
-                    </h3>
+                    <h3>Luôn được yêu thương</h3>
 
                     <p>
                         Bạn xứng đáng với thật nhiều
                         yêu thương và trân trọng.
                     </p>
-
                 </div>
-
             </div>
-
         </section>
-
-
-        <!-- ================= FINAL ================= -->
 
         <section class="final-section">
 
             <div class="final-glow"></div>
 
             <div class="final-content">
-
-                <div class="final-heart">
-                    💗
-                </div>
+                <div class="final-heart">💗</div>
 
                 <p class="final-small">
                     ONE LAST MESSAGE
@@ -548,39 +392,26 @@
                     một phần xinh đẹp của thế giới này.
                 </p>
 
-                <button
-                    class="firework-button"
-                    onclick="launchMegaFireworks()"
-                >
+                <button class="firework-button" id="fireworkBtn">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     Tạo pháo hoa
                 </button>
-
             </div>
-
         </section>
 
     </main>
 
-
-    <!-- ================= POPUP ================= -->
-
     <div id="popup" class="popup">
 
-        <div class="popup-overlay" onclick="closePopup()"></div>
+        <div class="popup-overlay" id="popupOverlay"></div>
 
         <div class="popup-box">
 
-            <button
-                class="close-popup"
-                onclick="closePopup()"
-            >
+            <button class="close-popup" id="closePopup">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div class="popup-icon">
-                💌
-            </div>
+            <div class="popup-icon">💌</div>
 
             <p class="popup-label">
                 A SPECIAL MESSAGE
@@ -599,72 +430,26 @@
             <div class="popup-hearts">
                 ♥ ♥ ♥
             </div>
-
         </div>
-
     </div>
 
-
-    <!-- ================= MUSIC ================= -->
-
-    <audio
-        id="bgMusic"
-        loop
-        preload="auto"
-    >
+    <audio id="bgMusic" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-
-    <!-- ================= FOOTER ================= -->
-
     <footer>
-
-        <div class="footer-heart">
-            ♥
-        </div>
+        <div class="footer-heart">♥</div>
 
         <p>
-            Made with
-            <span>❤</span>
-            for 20/10
+            Made with <span>❤</span> for 20/10
         </p>
 
         <small>
             Chúc những người phụ nữ tuyệt vời
             luôn được yêu thương.
         </small>
-
     </footer>
 
-
-    <!-- ================= INLINE FALLBACK ================= -->
-
-    <script>
-        function openGift() {
-            const intro = document.getElementById("intro");
-
-            if (!intro) {
-                return;
-            }
-
-            intro.classList.add("hide");
-
-            setTimeout(() => {
-                intro.style.display = "none";
-            }, 1000);
-
-            if (typeof startEffects === "function") {
-                startEffects();
-            }
-
-            if (typeof playMusic === "function") {
-                playMusic();
-            }
-        }
-    </script>
-
     <script src="script.js"></script>
-
 </body>
 </html>
